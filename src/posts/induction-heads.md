@@ -1,3 +1,4 @@
+
 ---
 title: "Inductive Heads in Transformer Models"
 date: "2025-08-05"
