@@ -9,11 +9,6 @@ excerpt: "Exploring how transformer models learn to copy patterns from their con
 
 One of the most fascinating discoveries in mechanistic interpretability is the existence of "induction heads." These are specific attention heads within transformer models that seem to be responsible for a significant portion of their in-context learning abilities.
 
-Of course. Here is a detailed article about inductive heads in LLMs.
-
-Inductive heads are a fascinating and crucial component of modern Large Language Models (LLMs) like GPT-4 and Gemini. They are not something programmers explicitly design but rather a specialized circuit that **emerges naturally** during the model's training process. Their function is fundamental to one of the most powerful abilities of LLMs: **in-context learning**. In essence, inductive heads are what allow a model to spot a pattern in the text you provide and then continue it. 🧐
-
----
 
 ## How Inductive Heads Work
 
