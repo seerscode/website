@@ -5,7 +5,7 @@ date: "2025-08-05"
 excerpt: "How neural networks represent more features than they have neurons, and why this complicates interpretability efforts."
 ---
 
-# The Superposition Principle in Large Language Models: A Comprehensive Analysis of Mechanisms, Implications, and Interpretability Frontiers
+## The Superposition Principle in Large Language Models: A Comprehensive Analysis of Mechanisms, Implications, and Interpretability Frontiers
 
 ### Part I: Defining the Phenomenon
 
