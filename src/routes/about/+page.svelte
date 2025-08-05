@@ -19,5 +19,5 @@
     <li>Superposition and the challenges of polysemantic neurons.</li>
   </ul>
   <h2>Contact</h2>
-  <p>You can reach me via <a href="mailto:marcio@example.com">email</a> or follow my work on <a href="https://github.com/marciodiaz" target="_blank">GitHub</a>.</p>
+  <p>You can reach me via <a href="mailto:marcio.diaz@gmail.com">email</a> or follow my work on <a href="https://github.com/marciodiaz" target="_blank">GitHub</a>.</p>
 </article>
