@@ -7,6 +7,10 @@ excerpt: "How neural networks represent more features than they have neurons, an
 
 # What is Superposition?
 
+$$
+x = y + z
+$$
+
 In the context of neural networks, superposition refers to the phenomenon where a model represents more features than it has dimensions (neurons) in a given layer. It achieves this by packing multiple, often unrelated, features into the activity of a single neuron—a state known as polysemanticity.
 
 ## Efficiency vs. Interpretability
