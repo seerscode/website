@@ -6,14 +6,14 @@ import rehypeKatex from 'rehype-katex';
 
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
-  extensions: ['.md'],
+  extensions: ['.md', '.svx'],
   remarkPlugins: [remarkMath],
   rehypePlugins: [rehypeKatex],
 };
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  extensions: ['.svelte', '.md'],
+  extensions: ['.svelte', '.md', '.svx'],
 
   // Consult https://kit.svelte.dev/docs/integrations#preprocessors
   // for more information about preprocessors
