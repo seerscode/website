@@ -1,7 +1,7 @@
 
 ---
 title: "The Challenges of Superposition in LLMs"
-date: "2025-07-28"
+date: "2025-08-05"
 excerpt: "How neural networks represent more features than they have neurons, and why this complicates interpretability efforts."
 ---
 

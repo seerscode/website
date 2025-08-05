@@ -1,4 +1,8 @@
-
+---
+title: "Inductive Heads in Transformer Models"
+date: "2025-08-05"
+excerpt: "What are inductive heads and in-context learning."
+---
 
 # **Deconstructing In-Context Learning: The Anatomy, Evolution, and Significance of Inductive Heads in Transformer Models**
 
