@@ -18,8 +18,8 @@ const config = {
   // Consult https://kit.svelte.dev/docs/integrations#preprocessors
   // for more information about preprocessors
   preprocess: [
-    vitePreprocess(),
-    mdsvex(mdsvexOptions)
+    mdsvex(mdsvexOptions),
+    vitePreprocess()
   ],
 
 	kit: {
