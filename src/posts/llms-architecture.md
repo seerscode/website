@@ -1,11 +1,11 @@
 
 ---
-title: "From Recurrence to Attention and Beyond: A Comprehensive Architectural Review of Large Language Models"
+title: "A Comprehensive Architectural Review of Large Language Models"
 date: "2025-08-04"
 excerpt: "This report provides a comprehensive, expert-level deconstruction of this architectural evolution."
 ---
 
-## From Recurrence to Attention and Beyond: A Comprehensive Architectural Review of Large Language Models
+## A Comprehensive Architectural Review of Large Language Models
 
 ### Introduction
 
