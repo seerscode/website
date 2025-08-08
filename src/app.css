@@ -2,3 +2,146 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom responsive table styles */
+@layer components {
+  .responsive-table {
+    @apply block w-full overflow-x-auto whitespace-nowrap border border-gray-200 rounded-lg my-8;
+  }
+
+  .responsive-table table {
+    @apply w-full border-collapse;
+  }
+
+  .responsive-table thead {
+    @apply bg-gray-50 border-b-2 border-gray-200;
+  }
+
+  .responsive-table tbody tr:nth-child(even) {
+    @apply bg-gray-50;
+  }
+
+  .responsive-table tbody tr:hover {
+    @apply bg-gray-100;
+  }
+
+  .responsive-table th,
+  .responsive-table td {
+    @apply px-4 py-3 text-left border-b border-gray-200 min-w-[120px];
+  }
+
+  .responsive-table th {
+    @apply font-semibold text-gray-900 sticky top-0 bg-gray-50 z-10;
+  }
+
+  .responsive-table td {
+    @apply text-gray-700;
+  }
+
+  /* Mobile responsive adjustments */
+  @media (max-width: 768px) {
+    .responsive-table {
+      @apply text-sm;
+    }
+
+    .responsive-table th,
+    .responsive-table td {
+      @apply px-3 py-2 min-w-[100px];
+    }
+  }
+
+  /* Enhanced typography for blog content */
+  .blog-content {
+    @apply max-w-4xl mx-auto;
+  }
+
+  .blog-content h1 {
+    @apply text-4xl font-bold text-gray-900 mt-8 mb-4;
+  }
+
+  .blog-content h2 {
+    @apply text-3xl font-semibold text-gray-900 mt-6 mb-3 border-b border-gray-200 pb-2;
+  }
+
+  .blog-content h3 {
+    @apply text-2xl font-semibold text-gray-900 mt-5 mb-2;
+  }
+
+  .blog-content h4 {
+    @apply text-xl font-semibold text-gray-900 mt-4 mb-2;
+  }
+
+  .blog-content p {
+    @apply mb-4 leading-relaxed text-gray-700;
+  }
+
+  .blog-content ul,
+  .blog-content ol {
+    @apply mb-4 pl-6;
+  }
+
+  .blog-content li {
+    @apply mb-2 leading-relaxed;
+  }
+
+  .blog-content blockquote {
+    @apply border-l-4 border-blue-500 pl-4 my-6 italic text-gray-600 bg-gray-50 p-4 rounded;
+  }
+
+  .blog-content code {
+    @apply bg-gray-100 px-1 py-0.5 rounded text-sm text-red-600 font-mono;
+  }
+
+  .blog-content pre {
+    @apply bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto my-6 border border-gray-700;
+  }
+
+  .blog-content pre code {
+    @apply bg-transparent p-0 text-inherit;
+  }
+
+  .blog-content img {
+    @apply max-w-full h-auto rounded-lg my-6 shadow-lg;
+  }
+
+  .blog-content hr {
+    @apply border-none border-t-2 border-gray-200 my-8;
+  }
+
+  .blog-content a {
+    @apply text-blue-600 no-underline border-b border-transparent transition-all duration-200;
+  }
+
+  .blog-content a:hover {
+    @apply text-blue-800 border-blue-800;
+  }
+
+  .blog-content strong {
+    @apply font-semibold text-gray-900;
+  }
+
+  .blog-content em {
+    @apply italic text-gray-600;
+  }
+}
+
+/* Math formula styling */
+.math {
+  @apply overflow-x-auto my-4;
+}
+
+/* Print styles for tables */
+@media print {
+  .responsive-table {
+    @apply block w-full overflow-visible whitespace-normal;
+  }
+  
+  .responsive-table table {
+    @apply w-full;
+  }
+  
+  .responsive-table th,
+  .responsive-table td {
+    @apply px-2 py-1 text-xs;
+  }
+}
