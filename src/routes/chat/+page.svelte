@@ -167,7 +167,7 @@
           <textarea
             bind:value={inputValue}
             on:keypress={handleKeyPress}
-            placeholder="Type your message here... (Press Enter to send, Shift+Enter for new line)"
+            placeholder="Type your message here..."
             class="flex-1 resize-none border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             rows="2"
             disabled={isLoading}
@@ -202,7 +202,6 @@
         <li>• Be specific in your questions for more accurate responses</li>
         <li>• You can ask for help with coding, writing, analysis, or general knowledge</li>
         <li>• The conversation history is saved locally in your browser</li>
-        <li>• Make sure you have set up your OpenAI API key in the environment variables</li>
       </ul>
     </div>
   </div>
