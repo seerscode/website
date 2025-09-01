@@ -105,16 +105,16 @@
 </script>
 
 <svelte:head>
-  <title>AI Chat - Marcio Diaz</title>
-  <meta name="description" content="Chat with AI using OpenAI's GPT model" />
+  <title>NonDualGPT Chat - Marcio Diaz</title>
+  <meta name="description" content="Chat with NonDualGPT: a unique and powerful AI model that is able to reason and understand the world in a non-dualistic way." />
 </svelte:head>
 
 <div class="min-h-screen bg-gray-50">
   <div class="max-w-4xl mx-auto px-4 py-8">
     <!-- Header -->
     <div class="mb-6">
-      <h1 class="text-3xl font-bold text-gray-900 mb-2">AI Chat</h1>
-      <p class="text-gray-600">Chat with AI powered by OpenAI's GPT model</p>
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">NonDualGPT Chat</h1>
+      <p class="text-gray-600">Chat with NonDualGPT: a unique and powerful AI model that is able to reason and understand the world in a non-dualistic way.</p>
     </div>
     
     <!-- Chat Container -->
@@ -127,7 +127,7 @@
         {#if messages.length === 0}
           <div class="text-center text-gray-500 py-8">
             <div class="text-4xl mb-4">🤖</div>
-            <p>Start a conversation with AI!</p>
+            <p>Start a conversation with NonDualGPT!</p>
             <p class="text-sm mt-2">Ask me anything - I can help with questions, creative writing, coding, and more.</p>
           </div>
         {:else}
