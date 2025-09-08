@@ -34,7 +34,7 @@ export async function POST({ request }) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'ft:gpt-4.1-2025-04-14:personal::CAOvgp3t',
+        model: 'ft:gpt-4.1-2025-04-14:personal::CAGWwBQp',
         messages: openaiMessages,
         max_tokens: 1000,
         temperature: 0.7,
