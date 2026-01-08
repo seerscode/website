@@ -3,6 +3,13 @@
 </svelte:head>
 
 <article class="prose lg:prose-lg max-w-none">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-8 not-prose">
+    <img 
+      src="https://pbs.twimg.com/profile_images/1957343821462679553/G4jMQl_W_400x400.jpg" 
+      alt="Marcio Diaz" 
+      class="w-40 h-40 rounded-full object-cover border-4 border-gray-200 shadow-lg"
+    />
+  </div>
   <h1>About Me</h1>
   <p>
     I am a <strong>Non Dualistic teacher</strong> based in the ancient wisdom tradition of <strong>Advaita Vedanta</strong>. My work is dedicated to guiding others toward the direct recognition of their true nature—the understanding that the apparent separation between the individual self and the absolute is an illusion.
