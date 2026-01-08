@@ -1,7 +1,7 @@
 
 <svelte:head>
-  <title>Marcio Diaz | Mechanistic Interpretability Researcher</title>
-  <meta name="description" content="Personal website of Marcio Diaz, a software engineer focused on mechanistic interpretability." />
+  <title>Marcio Diaz | Non Dualistic Teacher</title>
+  <meta name="description" content="Marcio Diaz is a Non Dualistic teacher based in Advaita Vedanta, guiding others toward the direct recognition of their true nature." />
 </svelte:head>
 
 <div class="space-y-8">
@@ -9,14 +9,17 @@
     Hello, I'm Marcio Diaz.
   </h1>
   <p class="text-xl text-gray-600 leading-relaxed">
-    I'm a software engineer researching <span class="font-medium text-black">mechanistic interpretability</span>.
+    I'm a <span class="font-medium text-black">Non Dualistic teacher</span> based in the ancient wisdom tradition of <span class="font-medium text-black">Advaita Vedanta</span>.
   </p>
   <p class="text-lg text-gray-600 leading-relaxed">
-    My work focuses on reverse-engineering neural networks to understand the algorithms they implement internally. I believe that understanding how models work is a crucial step towards building safe, reliable, and aligned AI systems.
+    My work is dedicated to guiding others toward the direct recognition of their true nature—the understanding that the apparent separation between the individual self and the absolute is an illusion. Through direct inquiry, self-investigation, and the timeless teachings of this tradition, I help students see through the veil of identification with the body, mind, and personal story.
   </p>
   <div class="pt-4 flex space-x-6">
     <a href="/blog" class="text-lg font-medium text-blue-600 hover:text-blue-800 transition hover:underline">
-      Read my research &rarr;
+      Read my writings &rarr;
+    </a>
+    <a href="/about" class="text-lg font-medium text-blue-600 hover:text-blue-800 transition hover:underline">
+      Learn more about me &rarr;
     </a>
   </div>
 </div>

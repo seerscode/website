@@ -7,7 +7,7 @@
   <title>Blog | Marcio Diaz</title>
 </svelte:head>
 
-<h1 class="text-3xl font-bold text-gray-900 mb-10">Research & Writings</h1>
+<h1 class="text-3xl font-bold text-gray-900 mb-10">Writings & Teachings</h1>
 
 <div class="space-y-10">
   {#each data.posts as post}
