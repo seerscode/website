@@ -2,6 +2,7 @@
 <svelte:head>
   <title>Marcio Diaz | Non Dualistic Teacher</title>
   <meta name="description" content="Marcio Diaz is a Non Dualistic teacher based in Advaita Vedanta, guiding others toward the direct recognition of their true nature." />
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </svelte:head>
 
 <div class="space-y-8">
@@ -30,5 +31,10 @@
     <a href="/about" class="text-lg font-medium text-blue-600 hover:text-blue-800 transition hover:underline">
       Learn more about me &rarr;
     </a>
+  </div>
+  
+  <div class="pt-12">
+    <h2 class="text-2xl font-semibold text-gray-900 mb-6">Schedule a Session</h2>
+    <div class="calendly-inline-widget" data-url="https://calendly.com/marcio-diaz/30min" style="min-width:320px;height:700px;"></div>
   </div>
 </div>
