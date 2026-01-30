@@ -1,11 +1,25 @@
 import { json } from '@sveltejs/kit';
 import { getPersonaById } from '$lib/personas.js';
 
-function buildQuestionPrompt(persona, topic = '') {
+function buildQuestionPrompt(persona, topic = '', recentPosts = []) {
   const topicLine = topic.trim()
-    ? ` The question should relate to the topic: "${topic}".`
-    : ' Ask something genuine that an ordinary person might wonder about—life, meaning, stress, identity, or how to be at peace.';
-  return `You are ${persona.name}, a regular person on a social feed. You're relatable, a bit tired, sometimes sarcastic or self-deprecating. Write exactly one short question (1-2 sentences, under 280 characters). No hashtags. Write only the question, nothing else.${topicLine}`;
+    ? ` Keep the overall theme related to: "${topic}".`
+    : '';
+
+  let threadContext = '';
+  if (Array.isArray(recentPosts) && recentPosts.length > 0) {
+    const lines = recentPosts
+      .slice(-12)
+      .map((p) => {
+        const label = p.kind === 'answer' ? 'Answer' : p.kind === 'question' ? 'Question' : 'Post';
+        return `[${label} - ${p.authorName}]: ${p.content}`;
+      });
+    threadContext = `\n\nRecent posts in the thread (oldest to newest):\n${lines.join('\n')}\n\nYour question must be a follow-up: react to, deepen, or challenge what was just said. Do not repeat an already asked question.`;
+  } else {
+    threadContext = ' Ask something genuine that an ordinary person might wonder about—life, meaning, stress, identity, or how to be at peace.';
+  }
+
+  return `You are ${persona.name}, a regular person on a social feed. You're relatable, a bit tired, sometimes sarcastic or self-deprecating. Write exactly one short follow-up question (1-2 sentences, under 280 characters). No hashtags. Write only the question, nothing else.${topicLine}${threadContext}`;
 }
 
 function buildAnswerPrompt(persona, question = '') {
@@ -21,7 +35,7 @@ function buildAnswerPrompt(persona, question = '') {
 export async function POST({ request }) {
   try {
     const body = await request.json().catch(() => ({}));
-    const { personaId, topic = '', mode = 'post', question = '' } = body;
+    const { personaId, topic = '', mode = 'post', question = '', recentPosts = [] } = body;
 
     if (!personaId || typeof personaId !== 'string') {
       return json({ error: 'personaId is required' }, { status: 400 });
@@ -45,8 +59,8 @@ export async function POST({ request }) {
       if (persona.type !== 'normal') {
         return json({ error: 'Only normal personas can ask questions.' }, { status: 400 });
       }
-      systemPrompt = buildQuestionPrompt(persona, topic);
-      userContent = 'Write your question.';
+      systemPrompt = buildQuestionPrompt(persona, topic, recentPosts);
+      userContent = recentPosts.length > 0 ? 'Write your follow-up question based on the thread above.' : 'Write your question.';
     } else if (mode === 'answer') {
       if (persona.type !== 'enlightened') {
         return json({ error: 'Only master personas can answer.' }, { status: 400 });

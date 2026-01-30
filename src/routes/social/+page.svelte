@@ -40,10 +40,23 @@
     const currentTopic = topic || topicInput;
     personaPostLoading = true;
     try {
+      const recentPosts = feed
+        .slice(0, 12)
+        .reverse()
+        .map((p) => ({
+          authorName: p.author.name,
+          content: p.content,
+          kind: p.kind || 'post'
+        }));
       const questionRes = await fetch('/api/persona-post', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ personaId: asker.id, topic: currentTopic, mode: 'question' })
+        body: JSON.stringify({
+          personaId: asker.id,
+          topic: currentTopic,
+          mode: 'question',
+          recentPosts
+        })
       });
       const questionData = await questionRes.json();
       const questionText = questionRes.ok && questionData.post ? questionData.post : questionData.error || '…';
