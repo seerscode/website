@@ -1,5 +1,5 @@
 <script>
-  import { personas, getPhraseForPersona, getPersonaById } from '$lib/personas.js';
+  import { personas, getPersonaById } from '$lib/personas.js';
 
   let feed = [];
   let topic = '';
@@ -8,7 +8,8 @@
   let isRunning = false;
   let loopInterval = null;
   let feedContainer;
-  const LOOP_INTERVAL_MS = 4500;
+  let personaPostLoading = false;
+  const LOOP_INTERVAL_MS = 6000;
   let postId = 0;
 
   function nextId() {
@@ -31,10 +32,28 @@
     }
   }
 
-  function tick() {
+  async function tick() {
+    if (personaPostLoading) return;
     const persona = personas[Math.floor(Math.random() * personas.length)];
-    const content = getPhraseForPersona(persona, topic || topicInput);
-    addPost(persona.id, content);
+    const currentTopic = topic || topicInput;
+    personaPostLoading = true;
+    try {
+      const res = await fetch('/api/persona-post', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ personaId: persona.id, topic: currentTopic })
+      });
+      const data = await res.json();
+      if (res.ok && data.post) {
+        addPost(persona.id, data.post);
+      } else {
+        addPost(persona.id, data.error || '…');
+      }
+    } catch (e) {
+      addPost(persona.id, 'Could not load post.');
+    } finally {
+      personaPostLoading = false;
+    }
   }
 
   function start() {
