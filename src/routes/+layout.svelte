@@ -13,6 +13,7 @@
         <div class="space-x-6">
           <a href="/blog" class="text-gray-600 hover:text-gray-900 transition duration-150">Blog</a>
           <a href="/about" class="text-gray-600 hover:text-gray-900 transition duration-150">About</a>
+          <a href="/social" class="text-gray-600 hover:text-gray-900 transition duration-150">Social</a>
           <a href="/chat" class="text-gray-600 hover:text-gray-900 transition duration-150">NDGPT</a>
         </div>
       </nav>
