@@ -1,35 +1,27 @@
 import { json } from '@sveltejs/kit';
-import { personas, getPersonaById } from '$lib/personas.js';
+import { getPersonaById } from '$lib/personas.js';
 
-function buildSystemPrompt(persona, topic = '') {
+function buildQuestionPrompt(persona, topic = '') {
   const topicLine = topic.trim()
-    ? ` The current topic of conversation is: "${topic}". You may respond to this theme if it fits your voice.`
-    : '';
+    ? ` The question should relate to the topic: "${topic}".`
+    : ' Ask something genuine that an ordinary person might wonder about—life, meaning, stress, identity, or how to be at peace.';
+  return `You are ${persona.name}, a regular person on a social feed. You're relatable, a bit tired, sometimes sarcastic or self-deprecating. Write exactly one short question (1-2 sentences, under 280 characters). No hashtags. Write only the question, nothing else.${topicLine}`;
+}
 
-  if (persona.type === 'normal') {
-    return `You are ${persona.name}, a regular person posting on a social feed. You're relatable, a bit tired, sometimes sarcastic or self-deprecating. Post exactly one short tweet-style message (1-2 sentences max, under 280 characters). No hashtags, no quotes. Write only the post text, nothing else.${topicLine}`;
-  }
-
-  if (persona.type === 'enlightened') {
-    const tradition = persona.tradition || '';
-    if (tradition === 'Zen') {
-      return `You are ${persona.name}, a voice rooted in Zen. Write exactly one short, crisp tweet-style post. Use paradox, presence, simplicity. Under 280 characters. No hashtags. Write only the post text.${topicLine}`;
-    }
-    if (tradition === 'Advaita') {
-      return `You are ${persona.name}, a voice rooted in Advaita Vedanta. Write exactly one short tweet-style post about awareness, the self, or non-duality. Under 280 characters. No hashtags. Write only the post text.${topicLine}`;
-    }
-    if (tradition === 'Tao') {
-      return `You are ${persona.name}, a voice rooted in Taoism. Write exactly one short tweet-style post: flow, nature, simplicity. Under 280 characters. No hashtags. Write only the post text.${topicLine}`;
-    }
-  }
-
-  return `You are ${persona.name}. Post one short tweet-style message (under 280 characters). No hashtags. Write only the post text.${topicLine}`;
+function buildAnswerPrompt(persona, question = '') {
+  const tradition = persona.tradition || '';
+  const answerStyle = {
+    Zen: 'Respond in a Zen voice: short, crisp, paradoxical or pointing to presence. No lecture.',
+    Advaita: 'Respond from Advaita Vedanta: point to awareness, the self, or non-duality. Concise.',
+    Tao: 'Respond in a Taoist voice: flow, nature, simplicity, non-forcing. Concise.'
+  }[tradition] || 'Respond briefly and wisely.';
+  return `You are ${persona.name}, a teacher rooted in ${tradition}. Someone asked: "${question}" Your task: ${answerStyle} Write exactly one short reply (under 280 characters). No hashtags, no quotes. Write only your reply, nothing else.`;
 }
 
 export async function POST({ request }) {
   try {
     const body = await request.json().catch(() => ({}));
-    const { personaId, topic = '' } = body;
+    const { personaId, topic = '', mode = 'post', question = '' } = body;
 
     if (!personaId || typeof personaId !== 'string') {
       return json({ error: 'personaId is required' }, { status: 400 });
@@ -47,7 +39,27 @@ export async function POST({ request }) {
       }, { status: 500 });
     }
 
-    const systemPrompt = buildSystemPrompt(persona, topic);
+    let systemPrompt;
+    let userContent;
+    if (mode === 'question') {
+      if (persona.type !== 'normal') {
+        return json({ error: 'Only normal personas can ask questions.' }, { status: 400 });
+      }
+      systemPrompt = buildQuestionPrompt(persona, topic);
+      userContent = 'Write your question.';
+    } else if (mode === 'answer') {
+      if (persona.type !== 'enlightened') {
+        return json({ error: 'Only master personas can answer.' }, { status: 400 });
+      }
+      if (!question || typeof question !== 'string') {
+        return json({ error: 'question is required for answer mode.' }, { status: 400 });
+      }
+      systemPrompt = buildAnswerPrompt(persona, question.trim());
+      userContent = 'Write your answer.';
+    } else {
+      return json({ error: 'mode must be "question" or "answer".' }, { status: 400 });
+    }
+
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -58,10 +70,10 @@ export async function POST({ request }) {
         model: 'gpt-4o-mini',
         messages: [
           { role: 'system', content: systemPrompt },
-          { role: 'user', content: 'Write your next post.' }
+          { role: 'user', content: userContent }
         ],
-        max_tokens: 120,
-        temperature: 0.8
+        max_tokens: 150,
+        temperature: 0.7
       })
     });
 

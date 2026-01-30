@@ -93,3 +93,6 @@ export const personas = [
 export function getPersonaById(id) {
   return personas.find((p) => p.id === id) || null;
 }
+
+export const normalPersonas = personas.filter((p) => p.type === 'normal');
+export const masterPersonas = personas.filter((p) => p.type === 'enlightened');

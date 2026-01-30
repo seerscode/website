@@ -1,5 +1,5 @@
 <script>
-  import { personas, getPersonaById } from '$lib/personas.js';
+  import { normalPersonas, masterPersonas, getPersonaById } from '$lib/personas.js';
 
   let feed = [];
   let topic = '';
@@ -9,14 +9,14 @@
   let loopInterval = null;
   let feedContainer;
   let personaPostLoading = false;
-  const LOOP_INTERVAL_MS = 6000;
+  const LOOP_INTERVAL_MS = 8000;
   let postId = 0;
 
   function nextId() {
     return `post-${++postId}-${Date.now()}`;
   }
 
-  function addPost(authorId, content) {
+  function addPost(authorId, content, kind = 'post') {
     const author = authorId === 'user' ? { id: 'user', name: 'You', handle: '@you', avatar: '✍️', color: 'bg-blue-100 text-blue-800' } : getPersonaById(authorId);
     if (!author) return;
     const post = {
@@ -24,6 +24,7 @@
       authorId,
       author,
       content: content.trim(),
+      kind,
       timestamp: new Date().toISOString()
     };
     feed = [post, ...feed];
@@ -33,24 +34,32 @@
   }
 
   async function tick() {
-    if (personaPostLoading) return;
-    const persona = personas[Math.floor(Math.random() * personas.length)];
+    if (personaPostLoading || normalPersonas.length === 0 || masterPersonas.length === 0) return;
+    const asker = normalPersonas[Math.floor(Math.random() * normalPersonas.length)];
+    const master = masterPersonas[Math.floor(Math.random() * masterPersonas.length)];
     const currentTopic = topic || topicInput;
     personaPostLoading = true;
     try {
-      const res = await fetch('/api/persona-post', {
+      const questionRes = await fetch('/api/persona-post', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ personaId: persona.id, topic: currentTopic })
+        body: JSON.stringify({ personaId: asker.id, topic: currentTopic, mode: 'question' })
       });
-      const data = await res.json();
-      if (res.ok && data.post) {
-        addPost(persona.id, data.post);
-      } else {
-        addPost(persona.id, data.error || '…');
-      }
+      const questionData = await questionRes.json();
+      const questionText = questionRes.ok && questionData.post ? questionData.post : questionData.error || '…';
+
+      const answerRes = await fetch('/api/persona-post', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ personaId: master.id, mode: 'answer', question: questionText })
+      });
+      const answerData = await answerRes.json();
+      const answerText = answerRes.ok && answerData.post ? answerData.post : answerData.error || '…';
+
+      addPost(master.id, answerText, 'answer');
+      addPost(asker.id, questionText, 'question');
     } catch (e) {
-      addPost(persona.id, 'Could not load post.');
+      addPost(asker.id, 'Could not load question.');
     } finally {
       personaPostLoading = false;
     }
@@ -95,13 +104,13 @@
 </script>
 
 <svelte:head>
-  <title>AI Personas Feed – Marcio Diaz</title>
-  <meta name="description" content="A social feed of AI personas: everyday people and enlightened voices in Zen, Advaita, and Tao, talking in a loop." />
+  <title>Q&A Feed – Marcio Diaz</title>
+  <meta name="description" content="A question-and-answer feed: normal people ask, masters (Zen, Advaita, Tao) answer." />
 </svelte:head>
 
 <div class="social-page max-w-2xl mx-auto">
-  <h1 class="text-2xl font-bold text-gray-900 mb-1">AI Personas</h1>
-  <p class="text-gray-600 text-sm mb-6">Normal folks and enlightened voices (Zen, Advaita, Tao) — set a topic and watch them talk.</p>
+  <h1 class="text-2xl font-bold text-gray-900 mb-1">Q&A Feed</h1>
+  <p class="text-gray-600 text-sm mb-6">Set a topic — a normal person asks a question, then a master (Zen, Advaita, Tao) answers.</p>
 
   <!-- Controls -->
   <div class="flex flex-wrap items-center gap-3 mb-4">
@@ -126,7 +135,7 @@
         type="text"
         bind:value={topicInput}
         on:blur={setTopic}
-        placeholder="Topic (e.g. stress, identity, Monday)"
+        placeholder="Topic for questions (e.g. stress, identity, meaning)"
         class="flex-1 min-w-0 px-3 py-2 rounded-full border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
       />
       <button
@@ -173,18 +182,23 @@
   >
     {#if feed.length === 0}
       <div class="p-8 text-center text-gray-500 text-sm">
-        Click <strong>Start</strong> to let the personas talk, or write a post above.
+        Click <strong>Start</strong> to generate a question (from a normal person) and an answer (from a master), or add your own post above.
       </div>
     {:else}
       <div class="divide-y divide-gray-100">
         {#each feed as post (post.id)}
-          <article class="p-4 hover:bg-gray-50/50 transition">
+          <article class="p-4 hover:bg-gray-50/50 transition {post.kind === 'answer' ? 'bg-amber-50/30' : ''}">
             <div class="flex gap-3">
               <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg shrink-0 {post.author.color}" aria-hidden="true">
                 {post.author.avatar}
               </div>
               <div class="flex-1 min-w-0">
                 <div class="flex items-center gap-2 flex-wrap">
+                  {#if post.kind === 'question'}
+                    <span class="text-xs font-medium text-blue-600 uppercase tracking-wide">Question</span>
+                  {:else if post.kind === 'answer'}
+                    <span class="text-xs font-medium text-amber-700 uppercase tracking-wide">Answer</span>
+                  {/if}
                   <span class="font-semibold text-gray-900">{post.author.name}</span>
                   <span class="text-gray-500 text-sm">{post.author.handle}</span>
                   {#if post.author.tradition}
