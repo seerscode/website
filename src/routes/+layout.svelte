@@ -4,31 +4,28 @@
   import 'katex/dist/katex.min.css'
 </script>
 
-<div class="min-h-screen bg-white">
-  <!-- Header -->
-  <header class="py-8">
+<div class="min-h-screen bg-slate-50">
+  <header class="py-6 border-b border-slate-200 bg-white/80 backdrop-blur">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <nav class="flex justify-between items-center">
-        <a href="/" class="text-xl font-semibold text-gray-900 hover:text-gray-700 transition">Marcio Diaz</a>
-        <div class="space-x-6">
-          <a href="/blog" class="text-gray-600 hover:text-gray-900 transition duration-150">Blog</a>
-          <a href="/about" class="text-gray-600 hover:text-gray-900 transition duration-150">About</a>
-          <a href="/social" class="text-gray-600 hover:text-gray-900 transition duration-150">Social</a>
-          <a href="/chat" class="text-gray-600 hover:text-gray-900 transition duration-150">NDGPT</a>
+        <a href="/" class="text-lg font-serif font-semibold text-slate-800 hover:text-slate-900 transition">Marcio Diaz</a>
+        <div class="space-x-6 text-sm">
+          <a href="/blog" class="text-slate-600 hover:text-slate-900 transition duration-150">Research</a>
+          <a href="/about" class="text-slate-600 hover:text-slate-900 transition duration-150">About</a>
+          <a href="/social" class="text-slate-600 hover:text-slate-900 transition duration-150">Social</a>
+          <a href="/chat" class="text-slate-600 hover:text-slate-900 transition duration-150">Chat</a>
         </div>
       </nav>
     </div>
   </header>
 
-  <!-- Main Content -->
   <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <slot />
   </main>
 
-  <!-- Footer -->
-  <footer class="py-8 mt-16 border-t border-gray-100">
-     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
-      &copy; {new Date().getFullYear()} Marcio Diaz.
+  <footer class="py-8 mt-16 border-t border-slate-200">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+      &copy; {new Date().getFullYear()} Marcio Diaz · Machine Consciousness Research
     </div>
   </footer>
 </div>

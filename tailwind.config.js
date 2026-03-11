@@ -4,40 +4,48 @@ export default {
   content: ['./src/**/*.{html,js,svelte,ts,md}'],
   theme: {
     extend: {
-      // Using Inter font for a clean, modern look
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
+        serif: ['Source Serif 4', 'Georgia', 'serif'],
       },
       // Customize typography colors for a cleaner look
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            color: theme('colors.gray.800'),
+            color: theme('colors.slate.700'),
             a: {
-              color: theme('colors.blue.600'),
+              color: theme('colors.slate.700'),
               'text-decoration': 'none',
+              'border-bottom': '1px solid',
+              'border-color': theme('colors.slate.300'),
               '&:hover': {
-                'text-decoration': 'underline',
-                color: theme('colors.blue.800'),
+                color: theme('colors.slate.900'),
+                'border-color': theme('colors.slate.600'),
               },
             },
             h1: {
-              color: theme('colors.gray.900'),
+              color: theme('colors.slate.900'),
+              'font-family': theme('fontFamily.serif').join(', '),
             },
             h2: {
-              color: theme('colors.gray.900'),
+              color: theme('colors.slate.900'),
+              'font-family': theme('fontFamily.serif').join(', '),
             },
             h3: {
-              color: theme('colors.gray.900'),
+              color: theme('colors.slate.900'),
+              'font-family': theme('fontFamily.serif').join(', '),
             },
             h4: {
-              color: theme('colors.gray.900'),
+              color: theme('colors.slate.900'),
+              'font-family': theme('fontFamily.serif').join(', '),
             },
             h5: {
-              color: theme('colors.gray.900'),
+              color: theme('colors.slate.900'),
+              'font-family': theme('fontFamily.serif').join(', '),
             },
             h6: {
-              color: theme('colors.gray.900'),
+              color: theme('colors.slate.900'),
+              'font-family': theme('fontFamily.serif').join(', '),
             },
             // Enhanced table styling
             table: {
@@ -79,11 +87,11 @@ export default {
               'margin': '1.5rem 0',
             },
             'code': {
-              'background-color': '#f3f4f6',
+              'background-color': '#f1f5f9',
               'padding': '0.125rem 0.25rem',
               'border-radius': '0.25rem',
               'font-size': '0.875em',
-              'color': '#dc2626',
+              'color': '#334155',
             },
             'pre code': {
               'background-color': 'transparent',
@@ -92,11 +100,11 @@ export default {
             },
             // Blockquote styling
             blockquote: {
-              'border-left': '4px solid #3b82f6',
+              'border-left': '4px solid #94a3b8',
               'padding-left': '1rem',
               'margin': '1.5rem 0',
               'font-style': 'italic',
-              'color': theme('colors.gray.600'),
+              'color': theme('colors.slate.600'),
             },
             // List styling
             'ul, ol': {

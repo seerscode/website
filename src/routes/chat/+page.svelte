@@ -105,16 +105,15 @@
 </script>
 
 <svelte:head>
-  <title>NonDualGPT Chat - Marcio Diaz</title>
-  <meta name="description" content="Chat with NonDualGPT: a unique and powerful AI model that is able to reason and understand the world in a non-dualistic way." />
+  <title>Chat - Marcio Diaz</title>
+  <meta name="description" content="Chat with an AI assistant for machine consciousness research and related topics." />
 </svelte:head>
 
-<div class="min-h-screen bg-gray-50">
+<div class="min-h-screen bg-slate-50">
   <div class="max-w-4xl mx-auto px-4 py-8">
-    <!-- Header -->
     <div class="mb-6">
-      <h1 class="text-3xl font-bold text-gray-900 mb-2">NonDualGPT Chat</h1>
-      <p class="text-gray-600">Chat with NonDualGPT: a unique and powerful AI model that is able to reason and understand the world in a non-dualistic way.</p>
+      <h1 class="text-3xl font-serif font-bold text-slate-900 mb-2">Chat</h1>
+      <p class="text-slate-600">Ask questions about machine consciousness, AI, or related research.</p>
     </div>
     
     <!-- Chat Container -->
@@ -125,20 +124,20 @@
         class="h-96 overflow-y-auto p-6 space-y-4"
       >
         {#if messages.length === 0}
-          <div class="text-center text-gray-500 py-8">
-            <div class="text-4xl mb-4">🤖</div>
-            <p>Start a conversation with NonDualGPT!</p>
-            <p class="text-sm mt-2">Ask me anything - I can help with questions, creative writing, coding, and more.</p>
+          <div class="text-center text-slate-500 py-8">
+            <div class="text-4xl mb-4">💬</div>
+            <p>Start a conversation</p>
+            <p class="text-sm mt-2">Ask about machine consciousness, AI architecture, or related topics.</p>
           </div>
         {:else}
           {#each messages as message (message.timestamp)}
             <div class="flex {message.role === 'user' ? 'justify-end' : 'justify-start'}">
               <div class="max-w-xs lg:max-w-md px-4 py-2 rounded-lg {
                 message.role === 'user' 
-                  ? 'bg-blue-500 text-white' 
+                  ? 'bg-slate-700 text-white' 
                   : message.isError 
                     ? 'bg-red-100 text-red-800 border border-red-200'
-                    : 'bg-gray-100 text-gray-800'
+                    : 'bg-slate-100 text-slate-800'
               }">
                 <div class="whitespace-pre-wrap">{message.content}</div>
                 <div class="text-xs opacity-70 mt-1">
@@ -150,7 +149,7 @@
           
           {#if isLoading}
             <div class="flex justify-start">
-              <div class="bg-gray-100 text-gray-800 px-4 py-2 rounded-lg">
+              <div class="bg-slate-100 text-slate-800 px-4 py-2 rounded-lg">
                 <div class="flex items-center space-x-2">
                   <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-600"></div>
                   <span>AI is thinking...</span>
@@ -162,20 +161,20 @@
       </div>
       
       <!-- Input Area -->
-      <div class="border-t bg-gray-50 p-4">
+      <div class="border-t bg-slate-50 p-4">
         <div class="flex space-x-2">
           <textarea
             bind:value={inputValue}
             on:keypress={handleKeyPress}
             placeholder="Type your message here..."
-            class="flex-1 resize-none border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            class="flex-1 resize-none border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent"
             rows="2"
             disabled={isLoading}
           ></textarea>
           <button
             on:click={sendMessage}
             disabled={!inputValue.trim() || isLoading}
-            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            class="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {isLoading ? 'Sending...' : 'Send'}
           </button>
@@ -186,7 +185,7 @@
           <div class="mt-2 flex justify-end">
             <button
               on:click={clearChat}
-              class="text-sm text-gray-500 hover:text-gray-700 underline"
+              class="text-sm text-slate-500 hover:text-slate-700 underline"
             >
               Clear chat history
             </button>
@@ -196,12 +195,12 @@
     </div>
     
     <!-- Instructions -->
-    <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-      <h3 class="font-semibold text-blue-900 mb-2">💡 Tips for better conversations:</h3>
-      <ul class="text-sm text-blue-800 space-y-1">
+    <div class="mt-6 bg-slate-100 border border-slate-200 rounded-lg p-4">
+      <h3 class="font-semibold text-slate-900 mb-2">Tips</h3>
+      <ul class="text-sm text-slate-700 space-y-1">
         <li>• Be specific in your questions for more accurate responses</li>
-        <li>• You can ask for help with coding, writing, analysis, or general knowledge</li>
-        <li>• The conversation history is saved locally in your browser</li>
+        <li>• Ask about machine consciousness, IIT, LLM architecture, or related topics</li>
+        <li>• Conversation history is saved locally in your browser</li>
       </ul>
     </div>
   </div>

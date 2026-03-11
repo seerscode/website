@@ -9,9 +9,9 @@
 </svelte:head>
 
 <article class="blog-content px-4 sm:px-6 lg:px-8">
-  <header class="mb-10 border-b border-gray-100 pb-6">
-    <h1 class="text-4xl font-bold text-gray-900 mb-4">{data.meta.title}</h1>
-    <p class="text-gray-500">
+  <header class="mb-10 border-b border-slate-200 pb-6">
+    <h1 class="text-4xl font-serif font-bold text-slate-900 mb-4">{data.meta.title}</h1>
+    <p class="text-slate-500 font-mono text-sm">
       Published on {new Date(data.meta.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
     </p>
   </header>
@@ -23,7 +23,7 @@
   </div>
 
   <div class="mt-12">
-    <a href="/blog" class="text-blue-600 hover:text-blue-800 transition hover:underline">&larr; Back to blog</a>
+    <a href="/blog" class="text-slate-700 hover:text-slate-900 transition border-b border-slate-300 hover:border-slate-600">&larr; Back to research</a>
   </div>
 </article>
 
