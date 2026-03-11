@@ -12,8 +12,6 @@
         <div class="space-x-6 text-sm">
           <a href="/blog" class="text-slate-600 hover:text-slate-900 transition duration-150">Research</a>
           <a href="/about" class="text-slate-600 hover:text-slate-900 transition duration-150">About</a>
-          <a href="/social" class="text-slate-600 hover:text-slate-900 transition duration-150">Social</a>
-          <a href="/chat" class="text-slate-600 hover:text-slate-900 transition duration-150">Chat</a>
         </div>
       </nav>
     </div>
