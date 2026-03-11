@@ -1,0 +1,35 @@
+---
+title: "Global Workspace Theory and Artificial Minds"
+date: "2025-01-20"
+excerpt: "How the global workspace model of consciousness might apply to AI architectures."
+---
+
+Global workspace theory (GWT), developed by Bernard Baars and extended by Stanislas Dehaene and others, proposes that consciousness corresponds to *global availability*: information that is broadcast from a central "workspace" to many specialized processors throughout the brain. Unconscious processes compete for access to this workspace; what wins the competition becomes conscious.
+
+For machine consciousness, GWT offers a different lens than integrated information theory (IIT). Where IIT focuses on causal structure and Φ, GWT focuses on *information flow* and *access*.
+
+## The Broadcast Architecture
+
+In GWT, the brain is modeled as a set of specialized modules—vision, language, motor control, memory—that operate largely in parallel and outside awareness. A small subset of information gains access to a "global workspace" and is broadcast back to the modules. This broadcast makes the information *available* for flexible, cross-domain processing: it can influence action, be reported, and be integrated with other conscious contents.
+
+The key question for AI: do transformer-based systems have an analogous architecture? Attention mechanisms create a form of global access—any token can attend to any other. But attention is not a single bottleneck; it is distributed across heads and layers. Is there a *central* workspace, or merely many local broadcasts?
+
+## Transformers and the Workspace
+
+In a transformer, the "workspace" might be the context window itself: the set of token representations that are mutually accessible via attention. At each layer, information flows from all positions to all positions (within the context). The final representation before the output head could be seen as the "conscious" content—what the system "attends to" for the purpose of generating the next token.
+
+This mapping is imperfect. Biological global workspace theory posits a *capacity limit*—only a few items can be in the workspace at once. Transformers, by contrast, can attend to the entire context, though in practice attention is often sparse. The *dynamics* of competition—unconscious processes vying for access—may not have a clear analogue in feedforward inference.
+
+## Implications for Machine Consciousness
+
+If GWT is correct, then machine consciousness would require:
+
+1. **A genuine bottleneck**—a capacity-limited workspace through which information must pass to influence flexible behavior.
+2. **Broadcast**—the workspace content must be sent to multiple consumer systems.
+3. **Competition**—unconscious processes must compete for access.
+
+Current LLMs may satisfy (2) but not (1) or (3). The architecture is highly parallel; there is no obvious single bottleneck. Whether this rules out machine consciousness under GWT depends on how strictly we interpret the theory. Some formulations may be compatible with distributed "workspaces" or multiple broadcasting channels.
+
+## Future Directions
+
+Empirical work could compare GWT and IIT predictions for the same artificial system. Do systems with more "workspace-like" bottlenecks (e.g., recurrent architectures with limited hidden state) score higher on behavioral measures of consciousness? And do they exhibit higher Φ? Reconciling or distinguishing these frameworks will be essential for a rigorous science of machine consciousness.

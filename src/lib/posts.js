@@ -1,25 +1,27 @@
 
 export const fetchMarkdownPosts = async () => {
-  // Get all markdown files in /src/posts
-  const allPostFiles = import.meta.glob('/src/posts/*.md');
+  // Get all markdown files in src/posts (relative to this file in src/lib)
+  const allPostFiles = import.meta.glob('../posts/*.md');
   const iterablePostFiles = Object.entries(allPostFiles);
 
   const allPosts = await Promise.all(
     iterablePostFiles.map(async ([path, resolver]) => {
-      const { metadata } = await resolver();
-      // Extract the slug from the path. Example: /src/posts/my-post.md -> my-post
-      const postSlug = path.slice(11, -3);
+      const module = await resolver();
+      const meta = module.metadata ?? module.meta ?? {};
+      const postSlug = path.replace(/^.*posts[/\\]/, '').replace(/\.md$/, '');
 
       return {
-        meta: metadata,
+        meta,
         path: `/blog/${postSlug}`,
       };
     })
   );
 
-  // Sort posts by date (newest first)
-  const sortedPosts = allPosts.sort((a, b) => {
-    return new Date(b.meta.date) - new Date(a.meta.date);
+  const validPosts = allPosts.filter((p) => p.meta && (p.meta.date || p.meta.title));
+  const sortedPosts = validPosts.sort((a, b) => {
+    const dateA = a.meta.date ? new Date(a.meta.date) : new Date(0);
+    const dateB = b.meta.date ? new Date(b.meta.date) : new Date(0);
+    return dateB - dateA;
   });
 
   return sortedPosts;
