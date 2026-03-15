@@ -5,7 +5,7 @@
 <article class="prose prose-slate lg:prose-lg max-w-none">
   <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-8 not-prose">
     <img 
-      src="https://pbs.twimg.com/profile_images/1957343821462679553/G4jMQl_W_400x400.jpg" 
+      src="https://pbs.twimg.com/profile_images/2029554923751256066/qy2XxKun_400x400.jpg" 
       alt="Marcio Diaz" 
       class="w-36 h-36 rounded-full object-cover border-2 border-slate-200"
     />
