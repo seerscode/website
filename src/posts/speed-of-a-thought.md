@@ -1,6 +1,6 @@
 ---
 title: "The Speed of a Thought: Why Consciousness Has a Size Limit — and What That Means for AI, Ants, and the Internet"
-date: "2025-01-25"
+date: "2026-03-15"
 excerpt: "A new theoretical framework suggests that a mind isn't defined by what it's made of, but by whether its parts can close a causal loop in time."
 ---
 
