@@ -24,6 +24,8 @@
   <footer class="py-8 mt-16 border-t border-slate-200">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
       &copy; {new Date().getFullYear()} Marcio Diaz · Machine Consciousness Research
+      <span class="mx-2">·</span>
+      <a href="https://x.com/marciodiaz_ai" target="_blank" rel="noopener noreferrer" class="text-slate-600 hover:text-slate-900 transition">Twitter</a>
     </div>
   </footer>
 </div>
