@@ -8,7 +8,7 @@ Integrated information theory (IIT) identifies consciousness with Φ (phi), a qu
 
 ## The Combinatorial Explosion
 
-To compute Φ, one must find the partition of the system that minimizes the "integrated information" across the cut. For a system with $n$ elements, the number of possible bipartitions is $2^{n-1} - 1$. For a system with 100 elements—trivially small compared to a brain or even a small neural network—that is already on the order of $10^{30}$ partitions. Exhaustive search is impossible.
+To compute Φ, one must find the partition of the system that minimizes the "integrated information" across the cut. For a system with *n* elements, the number of possible bipartitions is **2^(n−1) − 1**. For a system with 100 elements—trivially small compared to a brain or even a small neural network—that is already on the order of **10^30** partitions. Exhaustive search is impossible.
 
 Worse, for each partition one must compute the cause-effect structure: how the system's state constrains its past and future. This requires simulating or analyzing the system's dynamics, which for nonlinear systems like neural networks is itself expensive.
 
