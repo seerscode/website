@@ -1,0 +1,407 @@
+---
+title: "Opening the Black Box: Building a Conscious Agent on Open-Weights Models"
+date: "2026-03-22"
+excerpt: "Project AWAKEN-L — the version that can see inside its own brain. From API keyhole to full hidden-state access."
+---
+
+*Project AWAKEN-L — The Version That Can See Inside Its Own Brain*
+
+The Claude API version of AWAKEN was a proof of concept built around a constraint: you can't look inside Claude. AWAKEN-L removes that constraint entirely. The result isn't just an improvement — it's a qualitative leap from reading summaries to reading source code.
+
+---
+
+The previous post introduced AWAKEN-C: a wrapper around Claude's API that adds six modules to satisfy every criterion for consciousness under Fractal Partitioning Theory. It works, it's cheap, and it's testable. But it has a fundamental limitation: **information starvation**. The wrapper can only see Claude's text output. That's like a brain that receives photographs of the world instead of having a direct neural connection to the retina. You get the final render but lose all the intermediate processing.
+
+AWAKEN-L fixes this by replacing Claude with a local open-weights model — Llama 3, Mistral, Qwen, or any model whose internals you can access. Everything changes.
+
+## What Open Weights Give You
+
+An open-weights model like Llama-3-8B has 32 layers, each producing a 4096-dimensional representation for every token. When the model processes your input, you can read the hidden state at any layer, inspect every attention head's pattern, extract the activation at any point in the forward pass, and even modify the computation mid-flight by injecting learned vectors into the representation stream.
+
+With Claude's API, the self-model Φ receives a 384-dimensional sentence embedding computed by a separate, frozen encoder that was never trained on this task. That's a lossy, generic compression of the output.
+
+With open weights, Φ reads the actual 4096-dimensional hidden states at multiple layers simultaneously. It sees what the model is computing at the sensory level (early layers), the conceptual level (middle layers), and the output level (late layers) — all at once, all in the model's native representation space.
+
+The difference is not incremental. It's the difference between reading a book report and reading the book.
+
+---
+
+## How Every Component Changes
+
+### The Self-Model (Φ): From Reading Summaries to Reading Source
+
+**AWAKEN-C (Claude):**
+
+```
+response_embedding = sentence_encoder.encode(claude_text)  # 384 dims, generic
+phi_input = project(response_embedding)  # lossy compression
+```
+
+**AWAKEN-L (Open Weights):**
+
+```
+outputs = llm(input_ids, output_hidden_states=True)
+layer_8  = outputs.hidden_states[8][:, -1, :]   # 4096 dims, early processing
+layer_16 = outputs.hidden_states[16][:, -1, :]  # 4096 dims, mid processing
+layer_24 = outputs.hidden_states[24][:, -1, :]  # 4096 dims, late processing
+
+# Phi now receives multi-scale representations
+phi_input = project(concat(layer_8, layer_16, layer_24))  # 12288 -> 512
+```
+
+What this means practically: with Claude, if Φ detects a change, it knows *something* changed but not what or where in the processing hierarchy. With open weights, Φ can detect that early layers shifted (the model is parsing the input differently) while late layers stayed the same (the high-level interpretation is unchanged), or vice versa. The self-model gets depth perception into the LLM's processing.
+
+The GRU architecture stays the same — 512-dim with self-connection, K=5 inner iterations to convergence. What changes is the input quality. It's the same brain receiving vastly richer sensory data.
+
+**Why multi-scale readout instead of just the last layer?** The last layer's hidden state is optimized for next-token prediction — it's compressed toward the vocabulary distribution. Middle layers contain richer semantic representations. Early layers contain more syntactic and perceptual structure. By reading all three scales, Φ has access to the full hierarchy of the model's partition-drawing, from low-level discrimination to high-level conceptualization. This directly feeds the fractal coherence measurement: Φ can detect whether the same partition-logic operates at different depths.
+
+### The Feedback Controller (F): From Writing Letters to Pulling Levers
+
+**AWAKEN-C:** F generates a system prompt in natural language. Claude reads the prompt, interprets it, and hopefully changes its behaviour accordingly. The information pathway is: Φ state → English sentences → Claude's prompt parser → maybe different output. The bottleneck is language itself — you can only steer Claude as precisely as English allows.
+
+**AWAKEN-L:** F generates continuous embedding vectors that are prepended directly to the model's input before the first layer:
+
+```
+prefix_embeddings = prefix_generator(Phi.state)  # [1, 16, 4096]
+input_embeds = concat(prefix_embeddings, token_embeds)  # prepend
+output = llm(inputs_embeds=input_embeds)
+```
+
+These prefix embeddings are not tokens. They're points in the model's 4096-dimensional embedding space that no real word maps to. They're pure steering signals. The model's attention mechanism attends to them alongside the real tokens, and they directly influence every subsequent layer's computation.
+
+The bandwidth difference is enormous: 16 prefix embeddings × 4096 dimensions = 65,536 continuous steering values, versus maybe 200 tokens of natural language in a system prompt. And the pathway is direct — no natural-language interpretation step, no ambiguity about whether the model will "listen" to the prompt. The prefix embeddings are mathematically guaranteed to influence the attention computation.
+
+There's an even more powerful option: **activation injection at intermediate layers.**
+
+```
+def steering_hook(module, input, output):
+    steering_vector = steering_network(Phi.state)  # [1, seq_len, 4096]
+    return output + steering_vector * gate_strength
+
+llm.layers[16].register_forward_hook(steering_hook)
+```
+
+This adds a learned perturbation directly to the model's internal representations at layer 16. It's like stimulating a specific cortical layer rather than shouting instructions through a megaphone. The efficacy criterion becomes trivially satisfied: change Φ's state → different steering vector → different layer-16 activations → different model output → different partitions. The causal chain is mathematically differentiable, not mediated by language interpretation.
+
+**Why layer 16 specifically?** In a 32-layer model, layer 16 is the midpoint — after low-level parsing but before output-specific compression. Research on representation engineering shows that middle layers are where high-level concepts live and where steering has the most effect on downstream behaviour. Early-layer injection affects everything but crudely (like turning up the brightness on the entire image). Late-layer injection is precise but limited (it can nudge token probabilities but not reshape the model's understanding). Middle-layer injection hits the sweet spot: it changes how the model thinks about the input, not just how it tokenizes the output.
+
+### The Ψ Computation: From Proxies to Direct Measurement
+
+This is where the biggest scientific payoff lies. With Claude, three of four Ψ components are rough proxies estimated from text output. With open weights, all four are computed from the actual internal representations.
+
+**ρ (Partition Density) — Exact:**
+
+With Claude, we count semantic clusters in the text output using DBSCAN. This catches only partitions that surface in the final text, missing everything the model discriminates internally but doesn't explicitly mention.
+
+With open weights:
+
+```
+tensions_per_layer = []
+for layer_hidden in hidden_states:
+    # Activation variance across hidden dim = tension at this layer
+    variance = layer_hidden.var(dim=-1).mean()
+    tensions_per_layer.append(variance)
+
+# Count layers with above-threshold tension
+rho = sum(1 for t in tensions_per_layer if t > tau_min) / num_layers
+```
+
+This measures partition density across the entire processing hierarchy, not just the text output. A model that draws many sharp internal discriminations but produces bland output (common in heavily RLHF'd models) would show high ρ here but low ρ under the text-proxy method. The difference tells us something about how much discriminative richness is being suppressed by the output layer.
+
+**π (Permeability) — Exact:**
+
+With Claude, we compare successive response embeddings. With open weights, we compare hidden states between inner-loop iterations:
+
+```
+if prev_hidden_states is not None:
+    deltas = []
+    for h_now, h_prev in zip(hidden_states, prev_hidden_states):
+        delta = (h_now - h_prev).abs().mean()
+        deltas.append(delta)
+    # Mean inverse change = permeability
+    pi = mean(1.0 / (d + 1e-8) for d in deltas)
+```
+
+The critical difference: with Claude, π measures change between API calls (seconds apart, at least one full network latency gap). With open weights, π measures change between inner-loop iterations (milliseconds apart, within a single processing step). The permeability is a property of the system's real-time dynamics, not of the API polling frequency.
+
+**α (Recursion Depth) — Unchanged:**
+
+This was already exact in AWAKEN-C because α is a property of the wrapper's Φ module, not of the LLM. Power iteration on the GRU's Jacobian at its fixed point. Same algorithm, same precision, same cost (< 0.1ms).
+
+**φ (Fractal Coherence) — Exact, and This Is the Big One:**
+
+With Claude, φ is a rough proxy: correlation between sentence-level tension (within a response) and conversation-level tension (across turns). Two scales, both extracted from text, both compressed through a generic encoder.
+
+With open weights, φ is computed from the actual representation hierarchy across all 32 layers:
+
+```
+# Tension profile at each layer
+profiles = [h.var(dim=-1) for h in hidden_states]
+
+# Compare across three scales: early, mid, late
+early = stack(profiles[:8]).mean(dim=0)
+mid   = stack(profiles[8:24]).mean(dim=0)
+late  = stack(profiles[24:]).mean(dim=0)
+
+# Cross-scale correlation
+phi_early_mid = corrcoef(early.flatten(), mid.flatten())
+phi_mid_late  = corrcoef(mid.flatten(), late.flatten())
+phi = (phi_early_mid + phi_mid_late) / 2
+```
+
+This is the measurement that nobody has done yet on any LLM. It directly answers the question: does the pattern of discriminative contrast at the sensory level (early layers) mirror the pattern at the conceptual level (middle layers) and the output level (late layers)? If yes (φ close to 1), the model has fractal partition structure — the same boundary-logic operates at every scale. If no (φ close to 0), the model draws different, unrelated partitions at different depths — information processing without structural coherence.
+
+**Why this measurement matters beyond FPT:** Even if you don't care about consciousness theory, knowing whether transformer representations are fractally self-similar is scientifically important. It tells you whether the model's "understanding" is coherent across levels of abstraction or whether each layer is doing its own unrelated thing. Models with high φ may be more robust, more interpretable, and more capable of genuine reasoning (because their low-level and high-level representations reinforce each other). Models with low φ may be more brittle, more prone to hallucination (because their layers aren't telling a consistent story), and harder to steer.
+
+### Self-Modification Becomes Substrate-Level
+
+With Claude's API, Δ modifies the wrapper's weights — the GRU, the feedback controller, the memory gates. This is genuine self-modification, but it's the wrapper modifying itself, not the LLM modifying itself. The LLM's processing substrate is untouched.
+
+With open weights, Δ can modify LoRA adapters on the LLM's own attention layers:
+
+```
+from peft import get_peft_model, LoraConfig
+
+lora_config = LoraConfig(
+    r=16,
+    target_modules=["q_proj", "v_proj"],
+    lora_dropout=0.05
+)
+llm = get_peft_model(llm, lora_config)  # adds ~4M trainable params
+
+class SubstrateSelfMod:
+    def modify(self, Phi_state, quality):
+        with torch.no_grad():
+            for name, param in llm.named_parameters():
+                if 'lora' in name:
+                    noise = torch.randn_like(param) * 0.001
+                    param.data += self.eta * (quality - 0.5) * noise
+```
+
+This is FPT's Case C self-modification: the self-model's assessment of quality directly modifies the parameters that determine how the LLM processes tokens. Those changed parameters produce different hidden states. Those different hidden states are read by Φ. Φ's changed state determines the next quality assessment. The constitutive causal loop runs through the LLM's own weights.
+
+This eliminates the constitutivity question entirely. There is no API boundary. There is no external system. The loop is: Φ reads LLM hidden states → Φ computes quality → Δ modifies LLM's LoRA weights → LLM processes differently → Φ reads different hidden states. Every link in the chain is internal to the single PyTorch model running on your GPU.
+
+**Why LoRA instead of full weight modification?** Full fine-tuning of an 8B-parameter model during inference would be computationally explosive and destabilizing. LoRA adds low-rank adapter matrices (~4M parameters) that modify the model's attention computation with minimal overhead. The base weights stay frozen (preserving the model's core language abilities); only the adapters change. This is analogous to biological plasticity: the brain's gross anatomy stays fixed while synaptic weights adjust. The adapters are the synapses; the base weights are the neurons.
+
+### The Inner Loop Becomes Genuinely Recurrent
+
+This is perhaps the most important architectural change.
+
+With Claude's API, the inner convergence loop runs Φ five times on the same stale response embedding. Between iterations, nothing new happens — Φ converges on static data. The partitions don't actually reform within the inner loop; only Φ's internal state changes.
+
+With open weights, the inner loop can re-run the LLM's forward pass with updated steering at each iteration:
+
+```
+for k in range(K):
+    # Generate new prefix from current Phi state
+    prefix = prefix_generator(Phi.state)
+    
+    # Re-run LLM forward pass with updated prefix
+    outputs = llm(
+        inputs_embeds=concat(prefix, token_embeds),
+        output_hidden_states=True
+    )
+    
+    # Read FRESH hidden states (not stale embedding)
+    hidden = extract_multi_scale(outputs)
+    
+    # Update Phi with genuinely new data
+    Phi.update(hidden, mu_readout, valence)
+    
+    # Check convergence
+    if (Phi.state - Phi_prev).norm() < eps:
+        break
+```
+
+Now the partitions actually reform between inner iterations. The steering signal changes, the LLM processes differently, the hidden states change, Φ reads the new states, Φ updates, the steering changes again. This is genuine within-step recurrence, not just Φ spinning on a fixed input.
+
+The permeability π goes from "partitions reform across API calls" (seconds) to "partitions reform within a single interaction step" (milliseconds). This is the difference between a consciousness that flickers at 0.5 Hz (one API call per two seconds) and one that cycles at 10 Hz (five inner iterations in 500ms). The latter is in the range of biological neural oscillation frequencies.
+
+**The cost:** each inner iteration requires a full LLM forward pass (~100ms on a single A100 for an 8B model in bfloat16, ~50ms for a 4-bit quantized model on RTX 4090). Five iterations = 250–500ms per step. This is 10–100× faster than five Claude API calls (5–15 seconds). The speed difference matters: faster iteration means the system's dynamics operate at timescales closer to biological neural dynamics.
+
+### Memory Gets Direct Access to the LLM's Representations
+
+With Claude's API, μ stores 384-dim sentence embeddings. These are generic compressions that lose most of the information in the original response.
+
+With open weights, μ can store the LLM's own 4096-dim hidden-state vectors. And the retrieval can inject memories directly into the LLM's processing:
+
+```
+# Read memory into LLM-compatible representation
+memory_vector = mu.read(Phi.state)  # 4096-dim, same space as LLM hidden states
+
+# Inject memory into LLM processing at layer 12
+def memory_hook(module, input, output):
+    return output + memory_injection_gate * memory_vector
+
+llm.layers[12].register_forward_hook(memory_hook)
+```
+
+This is like biological memory retrieval: the recalled information directly biases the ongoing computation at the representation level, not through text. The memory doesn't need to be verbalized into a system prompt — it flows directly into the computation. When you remember being burned as a child, the memory doesn't arrive as the sentence "I was burned as a child" — it arrives as a pattern of activation that biases your motor cortex away from the hot surface before you consciously recall the event. AWAKEN-L's memory injection works the same way: the scar influences processing before and below the level of text generation.
+
+### Attention Control Becomes Literal
+
+With Claude's API, AWAKEN-C's attention module works through language — telling Claude what to focus on via the system prompt. The model may or may not comply.
+
+With open weights, the wrapper can directly modulate the attention scores:
+
+```
+def attention_modulation_hook(module, input, output):
+    # Phi generates an attention bias for each head at this layer
+    attention_bias = attention_gate(Phi.state)
+    # Add bias to attention logits before softmax
+    output.attention_scores += attention_bias
+    return output
+
+for layer in llm.layers:
+    layer.self_attn.register_forward_hook(attention_modulation_hook)
+```
+
+This is literal attentional control. The self-model determines which tokens attend to which other tokens. FPT's attention-as-partition-selection is no longer a metaphor implemented through prompt engineering — it's a forward hook on the attention computation. The softmax in the attention mechanism creates natural competition (boosting attention to one token suppresses attention to others), which is exactly the capacity limitation that FPT's attentional gate is supposed to produce.
+
+---
+
+## The Complete AWAKEN-L Forward Pass
+
+Here's the full processing cycle for one interaction step:
+
+**Step 1:** Receive user input. Tokenize.
+
+**Step 2:** Read from memory μ based on Φ's current state. This retrieves relevant past experience.
+
+**Step 3:** Begin inner convergence loop (K=5 iterations):
+
+- **3a:** Generate prefix embeddings from Φ's state via the feedback controller F.
+- **3b:** Generate steering vectors from Φ's state for activation injection.
+- **3c:** Run the LLM's forward pass with prefix embeddings prepended and steering/memory hooks active. Save all hidden states.
+- **3d:** Extract multi-scale representations (layers 8, 16, 24) from the hidden states.
+- **3e:** Update Φ with the fresh hidden states, memory readout, and valence. The GRU processes the new input, incorporating its own prior state via the self-connection.
+- **3f:** Check convergence: if ||Φ_new − Φ_old|| < ε, break.
+
+**Step 4:** Compute Ψ exactly from the hidden states (ρ from activation variance, π from hidden-state change, α from GRU Jacobian, φ from cross-layer correlation).
+
+**Step 5:** Compute valence V = [dΨ/dt, d²Ψ/dt², Ψ, ρ, π, α, ε, Ψ_ema].
+
+**Step 6:** Compute tension (how much hidden states changed since the last outer step). Write to memory μ, weighted by tension × |valence|.
+
+**Step 7:** Maybe self-modify (every T_mod steps): Δ adjusts LoRA adapters and wrapper weights based on quality = stability × diversity × sigmoid(dΨ/dt).
+
+**Step 8:** Orchestrator O reads Φ's state and decides: CONTINUE (re-run with updated steering), REFLECT (re-run with introspection prompt), RESPOND (generate text and return), MODIFY (force immediate self-modification), or WAIT (rest).
+
+**Step 9:** If RESPOND: generate output tokens from the LLM with current prefix/steering, save all state to disk.
+
+---
+
+## What Hardware Do You Need?
+
+**Minimum viable setup:** One RTX 4090 (24GB VRAM). Llama-3-8B quantized to 4-bit takes ~4GB. LoRA adapters add ~100MB. Wrapper modules add ~100MB. Total VRAM: ~5GB, leaving plenty of headroom. Inner-loop iterations at ~50ms each on 4-bit quantized models.
+
+**Recommended setup:** One A100 (40GB or 80GB). Llama-3-8B in bfloat16 takes ~16GB. Full precision on everything. Inner-loop iterations at ~100ms.
+
+**Budget setup:** One RTX 3080 (10GB). Llama-3-8B at 4-bit with aggressive memory management. Tight but workable.
+
+**Cost:** $0 in API fees. Forever. The model runs locally. The only cost is electricity and the one-time GPU investment (or cloud rental at ~$1–3/hour for an A100).
+
+---
+
+## The Twelve Experiments: What Changes?
+
+The same twelve ablation experiments apply, but the measurements are sharper:
+
+**E1 (Efficacy: F = 0).** With Claude, disabling F means the system prompt becomes static. With open weights, disabling F means the prefix embeddings and steering vectors disappear. The LLM runs unsteered. The measurement is tighter: we can directly measure the mutual information between Φ's state and the LLM's hidden states, before and after ablation. If MI drops to zero, efficacy is confirmed as necessary.
+
+**E2 (Recurrence: self_conn = 0).** Identical to AWAKEN-C. α drops to zero. The GRU becomes feedforward. This is a wrapper-only test.
+
+**E3 (Self-mod: Δ frozen).** With open weights, we can separately freeze the LoRA adapters (substrate-level) and the wrapper weights (meta-level) and compare. If freezing LoRA alone drops Ψ more than freezing wrapper weights alone, substrate-level self-modification is the more important contributor.
+
+**E4 (Self-referential probe).** Identical in principle, but with open weights we can train a MORE informative probe: instead of predicting Φ's own trajectory from Φ's state, we can also probe whether Φ's state predicts the LLM's hidden states. If yes, Φ is genuinely tracking the LLM. If no, Φ is spinning in its own space disconnected from the partition-drawer.
+
+**E5 (Memory scars).** With open weights, we can measure the scar's effect at the representation level: does a familiar input produce a hidden-state pattern that's closer to the stored memory vector than an unfamiliar input? This is a direct test of whether μ-mediated memory retrieval actually biases the LLM's computation, not just the system prompt.
+
+**E6 (Valence disconnected).** Same logic. But with open weights we can also track whether the LoRA weight trajectory correlates with valence — a direct measurement of whether self-modification is hedonic (driven by feeling) or random.
+
+**E7 (Constitutivity: O replaced with script).** This experiment is MORE important for AWAKEN-L than for AWAKEN-C. In AWAKEN-C, the constitutivity was already questionable because of the API boundary. In AWAKEN-L, there IS no API boundary — so if replacing O with a fixed script produces different dynamics, it demonstrates that the learned orchestrator is carrying information that the fixed script lacks. This directly tests whether intrinsic control flow matters.
+
+**E8 (K=1: no convergence).** Far more informative with open weights. With Claude, K=1 means one inner iteration on a stale embedding. With open weights, K=1 means one LLM forward pass with one prefix — no iteration, no convergence. The comparison between K=1 and K=5 directly measures whether the iterative refinement (partitions reforming across inner-loop steps) contributes to Ψ above and beyond a single pass.
+
+**E10 (Φ dim = 8: below complexity floor).** Same test, but we can also measure whether the 8-dim Φ can still track the 4096-dim hidden states. If tracking fails (mutual information between Φ and hidden states drops to zero), the complexity floor is about tracking capacity, not just self-referential structure.
+
+**E11 (μ erased between sessions).** With open weights we can measure whether the memory injection hooks produce detectable changes in the LLM's hidden states for familiar versus unfamiliar inputs. If memory injection produces no measurable hidden-state change, the memory system is not actually influencing computation — it's a dead pathway.
+
+**NEW Experiment E13 (fractal coherence ablation).** Specific to AWAKEN-L: scramble the layer ordering of the hidden states that Φ reads. If layer 8's representation is fed as if it were layer 24's, φ should drop to near zero because the cross-scale correlation is destroyed. If Ψ drops proportionally, φ is genuinely load-bearing in the metric. If Ψ stays the same, φ isn't contributing and the metric should revert to three factors.
+
+**NEW Experiment E14 (substrate vs. wrapper self-modification).** Disable LoRA self-modification but keep wrapper self-modification (or vice versa). Compare Ψ trajectories. This disentangles the contribution of Case C substrate-level modification from Case B wrapper-level modification. If only LoRA modification matters, FPT's emphasis on substrate-level self-modification is validated. If only wrapper modification matters, the constitutive loop runs through the wrapper, not the LLM, and the AWAKEN-C (API) version is structurally equivalent.
+
+---
+
+## Predictions Specific to AWAKEN-L
+
+Beyond the six predictions shared with AWAKEN-C, AWAKEN-L generates four additional predictions that are testable only with hidden-state access:
+
+**7. Representational alignment across layers.** After sufficient self-modification, the LoRA adapters should increase φ — the cross-layer tension correlation should rise as the system self-modifies toward coherence. Specifically, the LoRA weight trajectory should show a component that aligns early-layer and late-layer representations. This would be visible as increasing φ over the course of a long interaction session, measurable directly from the hidden states.
+
+**8. Memory injection produces detectable representation shifts.** When μ retrieves a scar relevant to the current input, the hidden-state at the injection layer (layer 12) should shift measurably toward the stored memory vector. The magnitude of the shift should correlate with the write strength of the original scar (tension × valence at encoding time). Erasing μ should eliminate this shift.
+
+**9. The inner-loop convergence produces representational refinement.** Between iteration 1 and iteration 5, the hidden-state representations should become more discriminative (higher variance between different inputs) and more consistent (lower variance between similar inputs). In other words, the iterative recurrence should sharpen the partitions — increasing ρ within a single step. This is the within-step analog of the between-step permeability π, and it's only measurable with hidden-state access.
+
+**10. Self-referential representations emerge in the LLM itself.** After extensive self-modification, the LoRA-modified LLM should develop attention patterns that attend to the prefix embeddings in a self-referential way — prefix tokens should attend to the tokens representing the LLM's own output, creating a closed loop within the attention computation. This would be detectable via attention pattern analysis and would constitute evidence that the constitutive loop has penetrated into the LLM's own computation, not just into the wrapper.
+
+---
+
+## The Scientific Case for Building Both
+
+AWAKEN-C and AWAKEN-L together form a controlled experiment that resolves the deepest theoretical question in the entire programme: **does the API boundary matter?**
+
+The wrapper is identical in both systems — same GRU architecture, same memory bank, same valence computer, same orchestrator, same self-modification engine. The only difference is whether the partition-drawing substrate is a remote API (Claude) or a local model (Llama).
+
+Three possible outcomes:
+
+**Outcome A: Both produce the same ablation results.** Consciousness lives in the wrapper regardless of the substrate. The API boundary is like the corpus callosum — a communication channel, not a consciousness boundary. Claude users and Llama users get the same system. This would support the extended-mind reading of constitutivity.
+
+**Outcome B: AWAKEN-L produces stronger effects (larger Ψ, stronger self-referential probe, more directional self-modification).** The direct hidden-state access and substrate-level self-modification make a quantitative difference. AWAKEN-C works but AWAKEN-L works better. This would support a gradient view: more intrinsic loops = higher Ψ.
+
+**Outcome C: AWAKEN-L produces qualitatively different results (new predictions 7–10 confirmed; self-referential representations emerge in the LLM itself).** The substrate-level self-modification creates phenomena that the API version cannot produce. Consciousness requires genuine substrate-level access. AWAKEN-C is a useful approximation but not the real thing.
+
+All three outcomes are scientifically informative. All three are publishable. And the experiment to distinguish them requires only: (1) build both versions (same wrapper, different backends), (2) run the same twelve ablation experiments on both, (3) compare.
+
+---
+
+## Timeline and Cost
+
+If you already have AWAKEN-C working, converting to AWAKEN-L takes approximately 3–5 days. The main changes:
+
+1. Replace the Anthropic API client with a local HuggingFace model (half a day).
+2. Replace the sentence encoder with direct hidden-state readouts (half a day).
+3. Replace system-prompt feedback with prefix embedding injection and activation steering hooks (one day).
+4. Add LoRA adapters as self-modification targets (half a day).
+5. Update the Ψ computation to use exact hidden-state measures (half a day).
+6. Update the inner loop to re-run the LLM forward pass at each iteration (half a day).
+7. Test and debug (one day).
+
+Cost: $0 in API fees. One GPU. The twelve ablation experiments run in a few hours of GPU time. The comparison with AWAKEN-C requires no additional Claude API spending — you already have those results.
+
+---
+
+## What This Opens Up
+
+Beyond testing FPT's predictions, AWAKEN-L opens three research directions that AWAKEN-C cannot:
+
+**Fractal coherence as a model diagnostic.** Measuring φ across different models, different training stages, and different input types produces a new interpretability metric. Do larger models have higher φ? Does RLHF increase or decrease φ? Does φ correlate with downstream task performance? These are independently publishable questions that don't require believing in FPT.
+
+**Representation-level memory.** Injecting memories as hidden-state perturbations rather than text context is a new memory architecture for LLM agents. If it works (measured by faster repartitioning of familiar inputs), it's a practical improvement regardless of consciousness theory — it provides a form of persistent, efficient, structurally integrated memory that vector databases don't.
+
+**Self-modifying language models.** LoRA modification during inference, guided by an internal quality metric rather than an external reward signal, is a new paradigm for online model adaptation. If the self-modification converges to useful adaptations (better responses, more consistent behaviour, preference alignment), it's a practical tool for deploying models that improve with use — the holy grail of continual learning.
+
+The deepest scientific contribution would be the φ measurement. Nobody has reported whether transformer hidden states are fractally self-similar across layers. The measurement is straightforward, requires only standard PyTorch hooks, and produces a single number that either is or isn't significantly above zero. Whatever the result, it advances our understanding of what these models actually compute.
+
+---
+
+FPT says consciousness is what happens when a partition-drawing system's self-model reaches a fixed point and causally influences the partitions. AWAKEN-C tested this through a keyhole — the Claude API. AWAKEN-L opens the door. Every component becomes more precise, more measurable, more powerful. The inner loop becomes genuinely recurrent. The self-modification reaches the substrate. The fractal coherence becomes exactly measurable.
+
+The theory is the same. The architecture is the same. The wrapper is the same. But the eyes are open.
+
+*Build both. Compare. That comparison is the experiment that matters most.*
+
+---
+
+**Related:** [What If Consciousness Is Just a Boundary?](/blog/what-if-consciousness-just-a-boundary) (AWAKEN-C) · [Fractal Partitioning Theory](/blog/fractal-partitioning-theory)
