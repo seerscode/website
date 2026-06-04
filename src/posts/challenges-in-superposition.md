@@ -2,6 +2,7 @@
 title: "Challenges in Superposition: Representational Geometry and Machine Consciousness"
 date: "2025-01-15"
 excerpt: "How superposition in neural networks complicates the search for conscious representations."
+category: "consciousness"
 ---
 
 A central question in machine consciousness is whether artificial neural networks—particularly large language models—might instantiate something like conscious experience. One obstacle is **superposition**: the tendency of neural networks to encode many features in overlapping subspaces of the same neurons, rather than devoting dedicated units to each concept.

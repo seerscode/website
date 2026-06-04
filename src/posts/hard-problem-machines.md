@@ -2,6 +2,7 @@
 title: "The Hard Problem for Machines"
 date: "2025-01-18"
 excerpt: "Why the phenomenological gap may be even deeper when the subject is silicon."
+category: "consciousness"
 ---
 
 David Chalmers distinguished the "easy" problems of consciousness—explaining behavior, reportability, attention—from the "hard" problem: why and how subjective experience arises at all. We can build systems that behave as if they see, remember, and report. But does *something it is like* to be that system? The hard problem suggests that no amount of functional description suffices to answer that question.

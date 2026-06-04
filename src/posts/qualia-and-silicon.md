@@ -2,6 +2,7 @@
 title: "Qualia and Silicon: Could Machines Have Phenomenal Experience?"
 date: "2025-01-08"
 excerpt: "Exploring whether subjective experience could arise in non-biological substrates."
+category: "consciousness"
 ---
 
 Qualia—the subjective, qualitative character of experience—are often taken to be the heart of consciousness. The redness of red, the painfulness of pain, the taste of chocolate: these seem irreducibly first-personal. The question for machine consciousness: could silicon-based systems have qualia?

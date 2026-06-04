@@ -2,6 +2,7 @@
 title: "Induction Heads and the Structure of Internal Representations"
 date: "2025-01-10"
 excerpt: "How induction heads in transformers may reveal the architecture of internal "reasoning" and its relevance for machine consciousness."
+category: "consciousness"
 ---
 
 Transformers have been shown to develop **induction heads**: attention mechanisms that learn to complete repeated sequences by copying tokens from earlier in the context. For example, given "A B A B A", an induction head can predict "B" by attending to the previous "A" and copying the token that followed it. This simple mechanism underlies a surprising amount of in-context learning.

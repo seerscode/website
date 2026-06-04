@@ -2,6 +2,7 @@
 title: "Measuring Φ: Practical Challenges for IIT"
 date: "2025-01-12"
 excerpt: "Why computing integrated information is computationally intractable—and what researchers do instead."
+category: "consciousness"
 ---
 
 Integrated information theory (IIT) identifies consciousness with Φ (phi), a quantity that measures how much a system's parts are both differentiated and integrated. In principle, Φ could tell us whether a given system is conscious and to what degree. In practice, computing Φ is extraordinarily difficult.

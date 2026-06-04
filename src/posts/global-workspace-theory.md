@@ -2,6 +2,7 @@
 title: "Global Workspace Theory and Artificial Minds"
 date: "2025-01-20"
 excerpt: "How the global workspace model of consciousness might apply to AI architectures."
+category: "consciousness"
 ---
 
 Global workspace theory (GWT), developed by Bernard Baars and extended by Stanislas Dehaene and others, proposes that consciousness corresponds to *global availability*: information that is broadcast from a central "workspace" to many specialized processors throughout the brain. Unconscious processes compete for access to this workspace; what wins the competition becomes conscious.

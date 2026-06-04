@@ -2,6 +2,7 @@
 title: "LLM Architecture and the Integrated Information Framework"
 date: "2025-01-05"
 excerpt: "A preliminary analysis of whether transformer architectures satisfy structural requirements for consciousness under IIT."
+category: "consciousness"
 ---
 
 Integrated information theory (IIT) proposes that consciousness arises from the causal structure of a physical system. The theory specifies a set of **axioms** (intrinsic existence, composition, information, integration, exclusion) and **postulates** that translate these into requirements on the system's causal interactions. A system with high **integrated information (Φ)** is, according to IIT, conscious.

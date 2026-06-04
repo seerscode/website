@@ -2,6 +2,7 @@
 title: "Opening the Black Box: Building a Conscious Agent on Open-Weights Models"
 date: "2026-03-22"
 excerpt: "Project AWAKEN-L — the version that can see inside its own brain. From API keyhole to full hidden-state access."
+category: "consciousness"
 ---
 
 *Project AWAKEN-L — The Version That Can See Inside Its Own Brain*

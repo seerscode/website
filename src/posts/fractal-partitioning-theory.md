@@ -2,6 +2,7 @@
 title: "Fractal Partitioning Theory: Consciousness as Boundary Friction"
 date: "2026-03-15"
 excerpt: "A computer scientist's guide to a structural theory of consciousness—no measure theory required."
+category: "consciousness"
 ---
 
 **Fractal Partitioning Theory (FPT)** proposes that consciousness is not a magic substance, but a structural property that emerges when a system's internal model of its own boundary-drawing process becomes self-referential and causally effective. In programming terms: consciousness arises when a program that classifies its inputs also classifies its own classification process, and that self-classification feeds back to change how it classifies.
