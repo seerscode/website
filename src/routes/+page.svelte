@@ -7,7 +7,7 @@
 <div class="space-y-10">
   <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
     <img
-      src="https://pbs.twimg.com/profile_images/2029554923751256066/qy2XxKun_400x400.jpg"
+      src="/marcio.jpg"
       alt="Marcio Diaz"
       class="w-28 h-28 rounded-full object-cover border-2 border-slate-200"
     />
