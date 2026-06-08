@@ -1,9 +1,6 @@
-
 <script>
   export let data;
 
-  // Section mapping. Anything tagged "therapeutics" is current work;
-  // everything else is the older consciousness archive.
   const SECTIONS = [
     {
       id: 'therapeutics',
@@ -23,37 +20,55 @@
     ...s,
     posts: data.posts.filter(s.match),
   })).filter((s) => s.posts.length > 0);
+
+  function fmtDate(d) {
+    return new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  }
 </script>
 
 <svelte:head>
   <title>Research | Marcio Diaz</title>
 </svelte:head>
 
-<h1 class="text-3xl font-serif font-bold text-slate-900 mb-12">Research & Writings</h1>
-
 <div class="space-y-16">
-  {#each grouped as section}
-    <section>
-      <div class="border-b border-slate-300 pb-4 mb-8">
-        <p class="text-xs font-medium text-slate-500 uppercase tracking-widest mb-1">{section.label}</p>
-        <p class="text-slate-600 text-sm leading-relaxed max-w-2xl">{section.blurb}</p>
+  <header>
+    <p class="eyebrow mb-6">Research & writings</p>
+    <h1 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-stone-900 leading-tight mb-4">
+      Notes from a <span class="font-serif-italic">two-act</span> career.
+    </h1>
+    <p class="text-stone-600 max-w-xl text-base leading-relaxed">
+      Currently in act two — biotech, antisense oligonucleotides, rare disease drug development. Act one was machine consciousness research. Both sections live below.
+    </p>
+  </header>
+
+  {#each grouped as section, sIdx}
+    <section class="space-y-8">
+      <div class="border-t border-stone-200 pt-10">
+        <p class="eyebrow mb-3">{section.label}</p>
+        <p class="text-sm text-stone-500 leading-relaxed max-w-xl">{section.blurb}</p>
       </div>
 
-      <div class="space-y-10">
-        {#each section.posts as post}
-          <article>
-            <p class="text-sm text-slate-500 mb-2 font-mono">
-              {new Date(post.meta.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-            </p>
-            <h2 class="text-xl font-serif font-semibold text-slate-900 mb-3">
-              <a href={post.path} class="hover:text-slate-800 transition border-b border-slate-300 hover:border-slate-600">
+      <ul class="divide-y divide-stone-100">
+        {#each section.posts as post, i}
+          <li>
+            <a
+              href={post.path}
+              class="group grid grid-cols-[auto_1fr_auto] gap-x-6 items-baseline py-5 -mx-2 px-2 rounded-lg hover:bg-stone-50 transition"
+            >
+              <span class="font-mono text-xs text-stone-400 tabular-nums">
+                {fmtDate(post.meta.date)}
+              </span>
+              <span class="font-display text-base sm:text-[1.0625rem] font-medium text-stone-900 group-hover:text-stone-950 leading-snug tracking-tight">
                 {post.meta.title}
-              </a>
-            </h2>
-            <p class="text-slate-600">{post.meta.excerpt}</p>
-          </article>
+              </span>
+              <svg
+                class="w-3.5 h-3.5 text-stone-300 group-hover:text-stone-600 group-hover:translate-x-0.5 transition shrink-0"
+                viewBox="0 0 14 14" fill="none"
+              ><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+          </li>
         {/each}
-      </div>
+      </ul>
     </section>
   {/each}
 </div>

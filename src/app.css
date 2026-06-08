@@ -1,147 +1,179 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom responsive table styles */
+/* ============================================================
+   Modernized type stack — Inter for display + body, JetBrains Mono for code & eyebrows
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --gold: #b8860b;
+  --gold-bright: #d4a017;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-feature-settings: "cv02","cv03","cv04","cv11";
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgb(28, 25, 23);
+  background: #fff;
+}
+
+::selection { background: rgb(28, 25, 23); color: white; }
+
+.font-display { font-family: 'Inter', 'Inter Display', ui-sans-serif, system-ui, sans-serif; letter-spacing: -0.025em; }
+.font-mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+.font-serif-italic { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; }
+
+/* Eyebrow tag — used on home & post pages */
+.eyebrow {
+  @apply inline-flex items-center font-mono text-[0.6875rem] font-medium uppercase tracking-[0.08em] text-stone-500;
+}
+.eyebrow::before {
+  content: '';
+  @apply inline-block w-4 h-px bg-stone-400 mr-3;
+}
+
+/* Subtle reveal animation, applied via .reveal class */
+.reveal { opacity: 0; transform: translateY(8px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* ============================================================
+   Blog/article prose styles — refined typography, no clutter
+   ============================================================ */
 @layer components {
-  .responsive-table {
-    @apply block w-full overflow-x-auto whitespace-nowrap border border-slate-200 rounded-lg my-8;
-  }
-
-  .responsive-table table {
-    @apply w-full border-collapse;
-  }
-
-  .responsive-table thead {
-    @apply bg-slate-50 border-b-2 border-slate-200;
-  }
-
-  .responsive-table tbody tr:nth-child(even) {
-    @apply bg-slate-50;
-  }
-
-  .responsive-table tbody tr:hover {
-    @apply bg-slate-100;
-  }
-
-  .responsive-table th,
-  .responsive-table td {
-    @apply px-4 py-3 text-left border-b border-slate-200 min-w-[120px];
-  }
-
-  .responsive-table th {
-    @apply font-semibold text-slate-900 sticky top-0 bg-slate-50 z-10;
-  }
-
-  .responsive-table td {
-    @apply text-slate-700;
-  }
-
-  /* Mobile responsive adjustments */
-  @media (max-width: 768px) {
-    .responsive-table {
-      @apply text-sm;
-    }
-
-    .responsive-table th,
-    .responsive-table td {
-      @apply px-3 py-2 min-w-[100px];
-    }
-  }
-
-  /* Enhanced typography for blog content */
+  /* "blog-content" is the wrapper for prose-rendered markdown */
   .blog-content {
-    @apply max-w-4xl mx-auto;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: rgb(41, 37, 36); /* stone-800 */
   }
+  .blog-content > * + * { margin-top: 1.25em; }
+  .blog-content > h2 + *,
+  .blog-content > h3 + * { margin-top: 0.75em; }
 
   .blog-content h1 {
-    @apply text-4xl font-serif font-bold text-slate-900 mt-8 mb-4;
+    @apply font-display text-3xl sm:text-4xl font-semibold text-stone-900 mt-12 mb-4 tracking-tight;
   }
-
   .blog-content h2 {
-    @apply text-3xl font-serif font-semibold text-slate-900 mt-6 mb-3 border-b border-slate-200 pb-2;
+    @apply font-display text-xl sm:text-2xl font-semibold text-stone-900 mt-12 mb-3 tracking-tight;
   }
-
   .blog-content h3 {
-    @apply text-2xl font-serif font-semibold text-slate-900 mt-5 mb-2;
+    @apply font-display text-lg font-semibold text-stone-900 mt-8 mb-2 tracking-tight;
   }
-
   .blog-content h4 {
-    @apply text-xl font-serif font-semibold text-slate-900 mt-4 mb-2;
+    @apply font-display text-base font-semibold text-stone-900 mt-6 mb-1.5;
   }
 
   .blog-content p {
-    @apply mb-4 leading-relaxed text-slate-700;
-  }
-
-  .blog-content ul,
-  .blog-content ol {
-    @apply mb-4 pl-6;
-  }
-
-  .blog-content li {
-    @apply mb-2 leading-relaxed;
-  }
-
-  .blog-content blockquote {
-    @apply border-l-4 border-slate-400 pl-4 my-6 italic text-slate-600 bg-slate-50 p-4 rounded;
-  }
-
-  .blog-content code {
-    @apply bg-slate-100 px-1 py-0.5 rounded text-sm text-slate-800 font-mono;
-  }
-
-  .blog-content pre {
-    @apply bg-slate-800 text-slate-100 p-4 rounded-lg overflow-x-auto my-6 border border-slate-700;
-  }
-
-  .blog-content pre code {
-    @apply bg-transparent p-0 text-inherit;
-  }
-
-  .blog-content img {
-    @apply max-w-full h-auto rounded-lg my-6 shadow-lg;
-  }
-
-  .blog-content hr {
-    @apply border-none border-t-2 border-slate-200 my-8;
+    @apply text-stone-700;
   }
 
   .blog-content a {
-    @apply text-slate-700 no-underline border-b border-slate-300 transition-all duration-200;
+    color: rgb(28, 25, 23);
+    text-decoration: none;
+    border-bottom: 1px solid rgb(214, 211, 209); /* stone-300 */
+    transition: border-color 0.15s, color 0.15s;
   }
-
   .blog-content a:hover {
-    @apply text-slate-900 border-slate-600;
+    color: var(--gold);
+    border-bottom-color: var(--gold);
   }
 
   .blog-content strong {
-    @apply font-semibold text-slate-900;
+    @apply font-semibold text-stone-900;
   }
-
   .blog-content em {
-    @apply italic text-slate-600;
+    @apply font-serif-italic text-stone-700;
+    font-size: 1.05em;
   }
-}
 
-/* Math formula styling */
-.math {
-  @apply overflow-x-auto my-4;
-}
+  .blog-content ul, .blog-content ol {
+    @apply pl-5 my-4 text-stone-700;
+  }
+  .blog-content ul { list-style: none; }
+  .blog-content ul > li { position: relative; padding-left: 1.25rem; }
+  .blog-content ul > li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.75rem;
+    width: 6px; height: 1px;
+    background: rgb(168, 162, 158);
+  }
+  .blog-content ol { list-style: decimal; }
+  .blog-content li { margin-bottom: 0.35rem; line-height: 1.7; }
 
-/* Print styles for tables */
-@media print {
+  .blog-content blockquote {
+    @apply my-8 pl-6 border-l-2 border-stone-300 text-stone-600;
+    font-style: italic;
+  }
+  .blog-content blockquote p { margin: 0; }
+
+  .blog-content code {
+    @apply font-mono text-[0.875em] px-1.5 py-0.5 rounded;
+    background: rgb(245, 245, 244); /* stone-100 */
+    color: rgb(28, 25, 23);
+  }
+  .blog-content pre {
+    @apply font-mono text-sm my-6 p-5 rounded-lg overflow-x-auto;
+    background: rgb(28, 25, 23);
+    color: rgb(231, 229, 228); /* stone-200 */
+    border: 1px solid rgb(41, 37, 36);
+  }
+  .blog-content pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  .blog-content hr {
+    @apply my-12 border-stone-200;
+  }
+
+  .blog-content img {
+    @apply max-w-full h-auto rounded-lg my-8 mx-auto block;
+  }
+
+  /* Tables */
+  .blog-content table {
+    @apply w-full my-8 text-sm;
+    border-collapse: collapse;
+  }
+  .blog-content th, .blog-content td {
+    @apply px-4 py-2.5 text-left border-b border-stone-200 align-top;
+  }
+  .blog-content th {
+    @apply font-medium text-xs uppercase tracking-wider text-stone-500;
+    border-bottom-color: rgb(214, 211, 209);
+  }
+  .blog-content td { @apply text-stone-700; }
+  .blog-content tr:hover td { background: rgb(250, 250, 249); }
+
+  /* Responsive table wrapper (kept for backward compat) */
   .responsive-table {
-    @apply block w-full overflow-visible whitespace-normal;
+    @apply block w-full overflow-x-auto whitespace-nowrap my-8;
   }
-  
-  .responsive-table table {
-    @apply w-full;
-  }
-  
-  .responsive-table th,
-  .responsive-table td {
-    @apply px-2 py-1 text-xs;
-  }
+}
+
+/* Math */
+.math, .katex-display { @apply overflow-x-auto my-4; }
+
+/* Print */
+@media print {
+  body { background: #fff; color: #000; }
+  header, footer { display: none; }
 }
