@@ -2,56 +2,42 @@
 <script>
   export let data;
 
-  const CATEGORY_META = {
-    therapeutics: {
-      title: 'Therapeutics & Longinus',
-      description: 'Antisense, rare disease, CYFIP1, and notes from building a biotech.'
+  // Section mapping. Anything tagged "therapeutics" is current work;
+  // everything else is the older consciousness archive.
+  const SECTIONS = [
+    {
+      id: 'therapeutics',
+      label: 'Therapeutics',
+      blurb: 'Current focus. CYFIP1 ASO program at Longinus Therapeutics — rare-disease drug development, regulatory economics, and the engineering of antisense oligonucleotides for 15q11.2 BP1-BP2 microduplication.',
+      match: (p) => p.meta.category === 'therapeutics',
     },
-    consciousness: {
-      title: 'Machine Consciousness',
-      description: 'Earlier work on integrated information, transformers, and the question of phenomenal experience in artificial systems.'
+    {
+      id: 'consciousness',
+      label: 'Machine Consciousness',
+      blurb: 'Earlier work. Integrated information theory, global workspace theory, transformer interpretability, and the question of what it would take for a machine to have an inside.',
+      match: (p) => p.meta.category !== 'therapeutics',
     },
-    other: {
-      title: 'Other',
-      description: ''
-    }
-  };
+  ];
 
-  const ORDER = ['therapeutics', 'consciousness', 'other'];
-
-  $: grouped = (() => {
-    const buckets = {};
-    for (const post of data.posts) {
-      const cat = (post.meta && post.meta.category) || 'other';
-      if (!buckets[cat]) buckets[cat] = [];
-      buckets[cat].push(post);
-    }
-    return ORDER.filter((k) => buckets[k] && buckets[k].length).map((k) => ({
-      key: k,
-      meta: CATEGORY_META[k] || { title: k, description: '' },
-      posts: buckets[k]
-    }));
-  })();
+  $: grouped = SECTIONS.map((s) => ({
+    ...s,
+    posts: data.posts.filter(s.match),
+  })).filter((s) => s.posts.length > 0);
 </script>
 
 <svelte:head>
   <title>Research | Marcio Diaz</title>
 </svelte:head>
 
-<h1 class="text-3xl font-serif font-bold text-slate-900 mb-4">Research & Writings</h1>
-<p class="text-slate-600 mb-12 max-w-2xl">
-  Two threads run through this page. The current work is on therapeutics — antisense oligonucleotides for a rare chromosomal microduplication. The earlier work is on machine consciousness and transformer interpretability. Both are kept here.
-</p>
+<h1 class="text-3xl font-serif font-bold text-slate-900 mb-12">Research & Writings</h1>
 
 <div class="space-y-16">
   {#each grouped as section}
     <section>
-      <header class="mb-8 pb-3 border-b border-slate-200">
-        <h2 class="text-2xl font-serif font-semibold text-slate-900">{section.meta.title}</h2>
-        {#if section.meta.description}
-          <p class="text-slate-600 mt-2 max-w-2xl">{section.meta.description}</p>
-        {/if}
-      </header>
+      <div class="border-b border-slate-300 pb-4 mb-8">
+        <p class="text-xs font-medium text-slate-500 uppercase tracking-widest mb-1">{section.label}</p>
+        <p class="text-slate-600 text-sm leading-relaxed max-w-2xl">{section.blurb}</p>
+      </div>
 
       <div class="space-y-10">
         {#each section.posts as post}
@@ -59,11 +45,11 @@
             <p class="text-sm text-slate-500 mb-2 font-mono">
               {new Date(post.meta.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
-            <h3 class="text-xl font-serif font-semibold text-slate-900 mb-3">
+            <h2 class="text-xl font-serif font-semibold text-slate-900 mb-3">
               <a href={post.path} class="hover:text-slate-800 transition border-b border-slate-300 hover:border-slate-600">
                 {post.meta.title}
               </a>
-            </h3>
+            </h2>
             <p class="text-slate-600">{post.meta.excerpt}</p>
           </article>
         {/each}
