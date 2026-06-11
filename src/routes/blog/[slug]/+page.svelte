@@ -14,7 +14,7 @@
 <article>
   <header class="mb-12 pb-8 border-b border-stone-200">
     <p class="eyebrow mb-6">
-      {data.meta.category === 'therapeutics' ? 'Therapeutics' : 'Machine Consciousness'}
+      {data.meta.category === 'therapeutics' ? 'Therapeutics' : data.meta.category === 'genetics' ? 'Genetics' : 'Machine Consciousness'}
       <span class="ml-3 text-stone-400">·</span>
       <span class="ml-3 normal-case tracking-normal text-stone-500">{fmtDate(data.meta.date)}</span>
     </p>

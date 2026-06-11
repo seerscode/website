@@ -9,10 +9,16 @@
       match: (p) => p.meta.category === 'therapeutics',
     },
     {
+      id: 'genetics',
+      label: 'Genetics',
+      blurb: 'The dosage-sensitive biology of the human brain — gene dosage, neurodevelopment, and what modern genetics says about the old link between brilliance and madness.',
+      match: (p) => p.meta.category === 'genetics',
+    },
+    {
       id: 'consciousness',
       label: 'Machine Consciousness',
       blurb: 'Earlier work. Integrated information theory, global workspace theory, transformer interpretability, and the question of what it would take for a machine to have an inside.',
-      match: (p) => p.meta.category !== 'therapeutics',
+      match: (p) => p.meta.category !== 'therapeutics' && p.meta.category !== 'genetics',
     },
   ];
 
