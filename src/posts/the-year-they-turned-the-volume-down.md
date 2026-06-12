@@ -1,17 +1,17 @@
 ---
-title: "The Year They Turned the Volume Down — and Four Other Futures"
+title: "The Year They Turned the Volume Down — and Seven Other Futures"
 date: "2026-06-12"
-excerpt: "A science-fiction piece told as five branching futures, written by a father who works on the real versions. In some, a single dialed-down gene was enough. In others, the extra copy was only part of the story, and the real work was teaching a brain to rewire itself — or untangling the other genetic factors hiding underneath. Disciplined fiction: every road in it is real, just grown up."
+excerpt: "A science-fiction piece told as eight branching futures, written by a father who works on the real versions. In some, a single dialed-down gene was enough. In others, a whole-genome read rewrote the question, or the cure was grown in a dish from her own cells, or the extra copy was only part of a longer story. Disciplined fiction: every road in it is real, just grown up."
 category: "genetics"
 ---
 
 ## A note before we start
 
-This is fiction — five of them, actually. I want to say that plainly, because each is written as if it already happened, and I refuse to sell hope dressed as a forecast.
+This is fiction — eight of them, actually. I want to say that plainly, because each is written as if it already happened, and I refuse to sell hope dressed as a forecast.
 
-But it is *disciplined* fiction. Every technology in these futures exists today in a primitive, stammering form. I've only let them grow up, and I've let them grow up *differently* in each timeline — because the honest truth about my daughter Emma is that we don't yet know which future is hers. We don't even know, for certain, that her difference is the simple story we first told ourselves.
+But it is *disciplined* fiction. Every technology in these futures exists today in a primitive, stammering form. I've only let them grow up, and I've let them grow up *differently* in each timeline — because the honest truth about my daughter Emma is that we don't yet know which future is hers. We don't even know, for certain, that her difference is the simple story we first told ourselves. As I write this, we're still waiting on a deeper read of her genome than anyone has ever taken — and a few of these branches turn entirely on what that read finds.
 
-So instead of one tidy cure, here are five branches of the same tree. Some are gentle. Some are humbling. One of them I had to force myself to write, because it's the one where the easy explanation was wrong. Read them as stories. Just know the roads are real, and that I genuinely don't know which one we're on.
+So instead of one tidy cure, here are eight branches of the same tree. Some are gentle. Some are humbling. One of them I had to force myself to write, because it's the one where the easy explanation was wrong. Read them as stories. Just know the roads are real, and that I genuinely don't know which one we're on.
 
 First, the thing they all share.
 
@@ -91,13 +91,51 @@ This is the future that humbles me most, because it means the goal was never "ma
 
 ---
 
+## Timeline Six — Where the deep read changed the question
+
+The sixth future begins with a piece of paper we're actually waiting for as I write this: a complete, letter-by-letter read of Emma's entire genome — and her parents' — taken all at once. The doctors call it whole-genome sequencing of a trio: child plus mother plus father, read together so you can see what she inherited and what appeared new in her. When she was a baby, the test that found her duplication only looked at large chunks; it could see that a neighborhood had been copied, but not read every letter, and it couldn't see the genome's quieter handwriting at all.
+
+In this timeline, the deep read came back and *moved the whole question.*
+
+It found that the duplication wasn't a tidy, free-floating extra copy. It had landed in a particular spot and, in doing so, disturbed how a *neighboring* gene was read — a gene nobody had been looking at, because the first test couldn't see it. The headline finding had a footnote, and the footnote turned out to matter as much as the headline. In another version of this same branch, the read found that the extra copy carried a small internal flaw, so it wasn't simply "one gene too loud" but "one gene too loud *and slightly garbled.*" Either way, the lesson was identical: the cruder picture we'd built her whole early childhood around was *true but incomplete*, and the missing piece changed what the right therapy even was.
+
+I include this future because it's the one most in my own hands right now. We are, in real life, about to take that deeper read. And I have to hold two things at once: hope that it simply confirms the simple story and points to a clean target — and the humility to know it might rewrite the map entirely. In this timeline it rewrote the map, and the rewrite was a gift, because you cannot aim a precise therapy at a target you've only half-seen. Sometimes the most important treatment is *better vision.* The deep read didn't cure Emma. It told the future cures where to point.
+
+---
+
+## Timeline Seven — Where the cure was grown from her own cells
+
+The seventh future is the one that sounds the most like magic and is, weirdly, among the most real in the lab today.
+
+It started with a pinprick of Emma's own skin. They learned, years ago, to take an ordinary adult cell — a skin cell, a blood cell — and gently *rewind* it, switching it back into a state like the cells of a days-old embryo, able to become anything. We call these **induced pluripotent stem cells** — "induced" because we coaxed them backward, "pluripotent" because they can go on to become any tissue. From Emma's own pinprick, they could grow her own neurons. Brain cells, carrying her exact genome, her exact duplication, alive in a dish.
+
+In the nearer version of this branch, those dish-grown neurons were a *test track.* Every therapy from the timelines above — the copy-selective ASO, the plasticity opener — could be tried first on Emma's own cells, outside Emma, with nothing at stake. No more guessing whether a treatment would suit *her* specifically; they could watch it work, or fail, on her own neurons before it ever touched her. The cure wasn't the cells. The cells were the rehearsal room, and they meant we never had to make her the first experiment.
+
+But the further, bolder version of this future went all the way. They took her rewound cells, and in the dish — where you can be slow and perfect in a way you never can inside a living brain — they *removed the extra copy entirely.* Corrected the genome back to two clean copies, checked it letter by letter, grew those corrected cells into healthy neural tissue, and used it. In some tellings they nudged her own brain's repair systems to favor the corrected cells; in others, the corrected cells themselves were the therapy. The point that moved me is the order of operations: you do the hardest, most precise genetic surgery *outside* the body, on a small population of cells, where a mistake costs a dish and not a daughter — and only then bring the perfected result home.
+
+This is the future where "remove the duplication" stopped being reckless. Not by editing a living brain in place — far too blunt, as I said in the very first timeline — but by correcting her cells where it was safe to be perfect, and letting the perfected version find its way back.
+
+---
+
+## Timeline Eight — The grand combination (everything, in the right order)
+
+The eighth future isn't a new technology. It's all of them, finally cooperating — and it's the one I suspect is closest to how real medicine actually arrives: not one heroic breakthrough, but a *sequence* of good ones that each make the next one possible.
+
+It went, in this timeline, like this. First the **deep read** of Timeline Six, to see the whole truth — the duplication *and* the quiet polygenic chorus underneath it *and* the disturbed neighbor gene, the complete map instead of the headline. Then **her own cells** from Timeline Seven, grown in a dish, used both to test every option safely and, where needed, to correct the duplication outside her body. Then the **copy-selective tuning** of Timeline One, to bring any remaining overload down to a correct baseline inside her. Then — on that stable, correctly-tuned, fully-mapped foundation — the **plasticity opener** of Timeline Two, reopening her brain's power to rewire, paired with years of the right teaching. And running underneath all of it, the **humility** of Timelines Four and Five: treating a system rather than hunting one cause, and the wisdom to lift the suffering without amputating the self.
+
+No single thing was the cure. The *cure was the order.* See the whole picture, rehearse on her own cells, correct what could be corrected, tune what remained, reopen the brain, teach into the opening — and know, the entire way, what to leave alone.
+
+This is the future I'd build if I could choose. Not because any one piece is miraculous, but because the combination is *humane*: it's slow where it should be slow, precise where it can afford to be, and reverent about the parts of Emma that were never broken. If I get thirty more years and a great deal of luck, this is the one I'm working toward.
+
+---
+
 ## What every future shares (the part that isn't fiction)
 
-Five branches. In one, a single gene dialed down was enough. In another, the real work was reopening the brain's power to rewire. In a third, you needed both, in the right order. In a fourth, the duplication was only the loudest of many voices, and the cure had to get plural and humble. In the fifth, the deepest skill was knowing what *not* to fix.
+Eight branches. In one, a single gene dialed down was enough. In another, the real work was reopening the brain's power to rewire. In a third, you needed both, in the right order. In a fourth, the duplication was only the loudest of many voices, and the cure had to get plural and humble. In the fifth, the deepest skill was knowing what *not* to fix. In the sixth, a deeper read of her genome changed the question before anyone could answer it. In the seventh, the cure was rehearsed — and sometimes grown — from her own cells in a dish. In the eighth, nothing was new at all; the cure was simply all of them, in the right order.
 
 I don't know which one is Emma's. That's not false modesty — it's the literal state of the science, and of her. We're still learning whether the duplication is the whole story or the headline over a longer one. Any father who tells you he's certain is selling something.
 
-But here's what doesn't change across the branches, and it's the only part of this essay that isn't fiction: **every tool in every timeline exists right now, in crude form.** Molecules that turn genes down. The first attempts to tell one copy from another. Early science on reopening plasticity. The dawning understanding that big findings often sit on polygenic foundations. The pieces are all on the table today. What I've written are five different ways they might grow up and find each other.
+But here's what doesn't change across the branches, and it's the only part of this essay that isn't fiction: **every tool in every timeline exists right now, in crude form.** Molecules that turn genes down. The first attempts to tell one copy from another. Early science on reopening plasticity. Whole-genome reads of a child and her parents together. Taking a pinprick of skin and rewinding it into stem cells, then growing a person's own neurons in a dish. The dawning understanding that big findings often sit on polygenic foundations. The pieces are all on the table today. What I've written are eight different ways they might grow up and find each other.
 
 That's what hope is, I've decided — not wishing, but *inventory.* Looking honestly at the pieces already on the table, including the ones that complicate the easy story, and refusing to believe they'll never connect.
 
