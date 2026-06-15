@@ -9,7 +9,7 @@ category: "genetics"
 
 This is a long piece — a small book, really. I wrote it the way I'd want it explained to me at a kitchen table, not in a journal. No jargon without a plain translation right next to it. If a sentence needs a dictionary, I failed, and you should email me about it.
 
-I write about this for a personal reason. I am the father of a little girl, Emma, whose brain was built from a slightly different set of genetic instructions than most. I spend my days reading the dosage-sensitive biology of the human brain because her future depends on me understanding it. The "mad genius" question — is there a real link between a remarkable mind and a troubled one? — turns out to run straight through the same genes I study for her. So this is both a science essay and, quietly, a father's notebook.
+I write about this for a personal reason. I am the father of a little girl whose brain was built from a slightly different set of genetic instructions than most. I spend my days reading the dosage-sensitive biology of the human brain because her future depends on me understanding it. The "mad genius" question — is there a real link between a remarkable mind and a troubled one? — turns out to run straight through the same genes I study for her. So this is both a science essay and, quietly, a father's notebook.
 
 One promise: I will keep the science honest, including the parts that deflate the romance. The truth here is more interesting than the myth anyway.
 
@@ -134,7 +134,7 @@ I'll move faster through these, because the point is the *chorus*, not each solo
 
 Notice what just happened. I described ten-plus genes, and I kept using the *same handful of verbs*: tune, balance, wire, strengthen, turn on and off, set the level. None of these is a "disease gene." Every one of them is a **dial on the brain's settings.** Madness and brilliance are both what you get when the dials are set toward the edges.
 
-### The dosage genes — and Emma's neighborhood
+### The dosage genes — and my family's neighborhood
 
 There's a special category I have to include, because it's where my own family lives and because it makes the "dial" idea physical.
 
@@ -224,7 +224,7 @@ I'll end where I'm standing.
 
 I did not come to this subject as a curiosity. I came to it through my daughter, whose brain carries an extra copy of a small neighborhood of genes, and through a family history that includes both unusual ability and serious mental illness — the two roads from NPAS3's little fable, running in the same bloodline.
 
-Studying the "mad genius" genes taught me the single most important idea I carry into Emma's care, and I'll give it to you as the takeaway:
+Studying the "mad genius" genes taught me the single most important idea I carry into my daughter's care, and I'll give it to you as the takeaway:
 
 > **In the brain, the enemy is rarely "too little" or "too much" in the abstract. The enemy is distance from the right amount.** The genes that build a mind are dials, not switches. Health lives in a window. Brilliance and illness are often the same window's two edges.
 
@@ -234,4 +234,4 @@ The old poets felt the connection between the soaring mind and the breaking one,
 
 We can see it now. And seeing it — really seeing that the line between the gift and the illness is a matter of *how far*, not *whether* — is, I think, the beginning of being able to help.
 
-*For Emma.*
+*For her.*
