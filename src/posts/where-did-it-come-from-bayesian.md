@@ -1,116 +1,116 @@
 ---
 title: "Where Did It Come From? A Bayesian Walk Through a Genetic Question"
 date: "2026-06-12"
-excerpt: "Sometimes a child carries an extra copy of a small stretch of DNA. The obvious question — where did it come from? — turns out to be a question about probability, not biology. This is a plain-language walk through how a single new piece of evidence (a clear test in a younger sibling) quietly moves the odds, and why honest numbers come as ranges, not certainties."
+excerpt: "When a proband carries an extra copy of a small stretch of DNA, the obvious question — where did it come from? — is a question about probability, not biology. This is a rigorous Bayesian treatment of parent-of-origin inference: priors from the de novo rate, the likelihood each hypothesis assigns to each test result, the posterior after a negative parental test and a clear sibling, and why honest answers arrive as ranges, not point estimates."
 category: "genetics"
 ---
 
-## A note before we start
+## The setup
 
-This is a short one, and it's a little personal in spirit. Imagine a child built from a slightly different set of genetic instructions than most children — one who carries an extra copy of a small stretch of DNA on one of their chromosomes. I'll spare you the coordinates; what matters for this essay is a question any parent in this situation asks within about thirty seconds of getting the report:
+Consider a proband built from a slightly different set of genetic instructions than most — one who carries an extra copy of a small stretch of DNA on one chromosome, a copy-number gain detected on chromosomal microarray. The coordinates do not matter for this argument. What matters is the question asked within seconds of any such report:
 
 *Where did it come from?*
 
-It turns out that's not really a biology question. It's a probability question. And working through it teaches something clean about how evidence actually moves belief — the kind of thing I wish someone had shown me at a kitchen table years ago instead of in a textbook. So let me show you.
+This is not, at root, a biology question. It is a probability question — a parent-of-origin inference — and working it through cleanly demonstrates something general about how evidence actually moves belief. So let us work it through.
 
-No jargon without a translation sitting right next to it. If a sentence needs a dictionary, I failed.
-
----
-
-## The three doors
-
-When a child has an extra (or missing) piece of DNA, there are only a few places it can have come from. The realistic options are three doors:
-
-1. **Mom carries it too**, and passed it on.
-2. **Dad carries it too**, and passed it on.
-3. **Nobody carries it** — it appeared brand new, by chance, in the single egg or sperm that became the child. Geneticists call this *de novo*, Latin for "anew."
-
-That's the whole board. The question "where did it come from?" is just: *which door?*
-
-Here's the first honest admission. At the very start, before anyone is tested, you don't get to know. You can only assign **priors** — a fancy word for "starting odds based on what's generally true for this kind of finding." For a stretch like this one, the published data say these things are *usually inherited* rather than brand-new. So the starting odds lean toward a parent carrying it, split roughly evenly between Mom and Dad, with a smaller slice for *de novo*:
-
-> **Mom ≈ 47.5%   ·   Dad ≈ 47.5%   ·   brand-new (de novo) ≈ 5%**
-
-Those numbers aren't magic. They're just "what tends to be true for findings like this one," before we know anything about *this particular* family specifically.
+Every term will carry its translation alongside it. If a sentence needs a glossary, the sentence has failed.
 
 ---
 
-## Evidence, one piece at a time
+## The three hypotheses
 
-Then the tests start coming back, and each result is a piece of evidence that should move the odds. The tool for moving odds with evidence has a name — **Bayes' theorem** — but you don't need the equation to feel how it works. The intuition is everything.
+For an extra (or missing) segment of DNA in a proband, the possibilities reduce to three:
 
-**Dad gets tested first. Negative** — he doesn't carry it.
+1. **A parent carries it** (call this parent A), and transmitted it.
+2. **The other parent carries it** (parent B), and transmitted it.
+3. **Neither parent carries it** — it arose anew, by chance, in the single gamete (egg or sperm) that formed the proband. This is a *de novo* event, Latin for "afresh."
 
-Door 2 doesn't slam completely shut (more on that in a second), but it nearly does. And here's the part that surprises people: when one door closes, the probability behind it *doesn't* get shared out evenly to the others. It flows mostly to whichever remaining door was already most likely. Because "inherited" had the high prior, almost all of Dad's lost probability slides over to **Mom**, not to *de novo*. After Dad's negative test, the odds look roughly like:
+That is the entire hypothesis space. "Where did it come from?" is just: *which hypothesis?*
 
-> **Mom ≈ 90%   ·   brand-new ≈ 9%   ·   Dad anyway ≈ 1%**
+The first honest admission: at the outset, before anyone is tested, the answer is unknown. One can only assign **priors** — starting probabilities based on what is generally true for findings of this class. For many recurrent copy-number variants, the published literature shows they are *more often inherited* than de novo; the de novo fraction varies widely by locus but is frequently a minority of cases. So the priors lean toward a carrier parent, split roughly evenly between the two parents (absent any reason to favor one), with a smaller slice for *de novo*:
 
-(That last 1% is the honest acknowledgment that a blood test can miss a parent who carries the change only in some of their cells. Never quite zero.)
+> **parent A ≈ 47.5%  ·  parent B ≈ 47.5%  ·  de novo ≈ 5%**
 
-So far, so intuitive. Mom is the front-runner. She hasn't been tested yet — but then a different piece of evidence arrives from an unexpected direction.
-
----
-
-## The younger sibling
-
-The child has a younger sibling. And that sibling's genetic test comes back **clear** — they do *not* carry the extra piece.
-
-Now: does that tell us anything about where the *first child's* extra piece came from? It feels like it shouldn't. Different child, different dice. But it does, and seeing *why* is the whole point of this essay.
-
-Think about what each door predicts for the younger sibling.
-
-- **If Mom is a carrier**, then each child has a 50% chance of inheriting the change — a coin flip per pregnancy. So under this door, there was a 50% chance the younger sibling would be clear.
-- **If it was *de novo* in the first child** — a one-off accident in the egg or sperm that made that child — then the younger sibling was essentially *never* at risk. Under this door, "younger sibling is clear" was basically guaranteed, near 100%.
-
-Do you see the asymmetry? The younger sibling's clear result is *exactly what the de novo story predicts*, but only a *coin-flip's worth* of what the Mom-carrier story predicts. When a piece of evidence fits one explanation better than another, it nudges belief toward the explanation it fits.
-
-The size of the nudge is just the ratio of those two predictions: 100% versus 50%, or **2 to 1** in favor of *de novo* relative to Mom. Not a knockout. A nudge.
-
-Running that nudge through the math turns the previous odds into:
-
-> **Mom ≈ 82%   ·   brand-new ≈ 16%   ·   Dad anyway ≈ 1%**
-
-Mom is still the front-runner. But the chance this was a brand-new event in the first child just **roughly doubled** — from about 9% to about 16% — purely because the younger sibling came back clear. One healthy sibling, and the picture shifts.
+These figures are not arbitrary, but they are not specific to this family either. They encode "what tends to be true for findings like this," before any data about *this particular* family are in hand.
 
 ---
 
-## Why I won't give you a single number
+## Evidence, one result at a time
 
-If you asked me "so what are the odds?" and I said "82%," I'd be lying slightly — not about the math, but about the false confidence.
+Then the test results arrive, and each is a piece of evidence that should move the odds. The formal tool for updating probability with evidence is **Bayes' theorem**, but the equation is not required to feel how it works. The mechanism is what matters: each hypothesis assigns a *likelihood* — a probability — to the observed result, and the hypothesis that predicted the result better gains posterior probability at the expense of the one that predicted it worse.
 
-The honest answer is a **range**, because the single biggest input — how often this kind of change happens brand-new versus inherited — isn't known to a decimal point. It's known to a band. So I ran the same logic across the reasonable span of that input. The answer moves like this:
+**Parent B is tested first. Negative** — no detectable carriage.
 
-| If "brand-new" is really… | …then Mom is about | and de novo is about |
+Hypothesis 2 does not close completely (more on that shortly), but it nearly does. Here is the part that surprises people: when one hypothesis is eliminated, its probability is *not* shared out evenly to the survivors. It flows mostly to whichever surviving hypothesis already had the higher prior. Because "inherited" carried the high prior, almost all of parent B's probability slides to **parent A**, not to *de novo*. After parent B's negative test, the posterior is approximately:
+
+> **parent A ≈ 90%  ·  de novo ≈ 9%  ·  parent B anyway ≈ 1%**
+
+That residual 1% is the honest acknowledgment that a blood test can miss a parent who carries the variant only in a fraction of cells — *germline or somatic mosaicism*. The likelihood of a true-negative blood test given a low-level mosaic carrier is not 100%, so the hypothesis never collapses fully to zero.
+
+So far, intuitive. Parent A is the front-runner, and has not yet been tested directly. Then a second, indirect piece of evidence arrives.
+
+---
+
+## The unaffected sibling
+
+The proband has a younger sibling, and that sibling's targeted test comes back **clear** — no carriage of the extra segment.
+
+Does that say anything about where the *proband's* copy came from? Intuitively it feels irrelevant — different child, independent meiosis. But it is informative, and seeing *why* is the entire point.
+
+Consider what each hypothesis predicts for the sibling — the likelihood each assigns to "sibling is clear":
+
+- **If parent A is a carrier of an autosomal variant**, each child has a 50% chance of inheriting it — an independent coin flip per conception. So under this hypothesis, the probability the sibling would be clear was ~50%.
+- **If the variant was *de novo* in the proband** — a one-off event in the single gamete that formed the proband — then the sibling was essentially never at risk. Under this hypothesis, "sibling is clear" was very nearly guaranteed, ~100%. (Not exactly 100%: rare parental germline mosaicism can produce a low recurrence risk even for an apparently de novo event, which is precisely why post-test counseling never quotes zero.)
+
+There is the asymmetry. The sibling's clear result is *exactly what the de novo hypothesis predicts*, but only a *coin-flip's worth* of what the parent-A-carrier hypothesis predicts. Evidence that fits one explanation better than another shifts belief toward the explanation it fits.
+
+The magnitude of the shift is the ratio of those likelihoods — the **Bayes factor** — roughly 100% versus 50%, or **2 to 1** in favor of *de novo* relative to parent A. Not decisive. A genuine nudge.
+
+Applying that factor to the previous posterior yields:
+
+> **parent A ≈ 82%  ·  de novo ≈ 16%  ·  parent B anyway ≈ 1%**
+
+Parent A is still the front-runner. But the probability this was a de novo event in the proband has **roughly doubled** — from ~9% to ~16% — purely because an unaffected sibling came back clear. One healthy sibling, and the picture moves measurably.
+
+---
+
+## Why the honest answer is a range, not a point
+
+Reporting "82%" would slightly misrepresent the situation — not the arithmetic, but the false confidence the single number implies.
+
+The honest output is a **range**, because the dominant input — the de novo rate for this class of variant, which sets the prior — is not known to a decimal. It is known to a band. Propagating the same logic across the plausible span of that input gives a *sensitivity analysis*:
+
+| If the de novo rate is really… | …then parent A is about | and de novo is about |
 |---|---|---|
-| rare (2%) | 91% | 8% |
+| low (2%) | 91% | 8% |
 | middle (5%) | 82% | 16% |
-| common (10%) | 70% | 29% |
+| high (10%) | 70% | 29% |
 
-So the truthful statement isn't "82%." It's: **Mom most likely carries it — somewhere around 70 to 91% — and the chance it was a brand-new event in the first child is somewhere around 8 to 29%.** A front-runner and a live underdog, both quantified, neither pretended into false precision.
+So the truthful statement is not "82%." It is: **parent A most likely carries it — somewhere around 70 to 91% — and the chance it was a de novo event in the proband is somewhere around 8 to 29%.** A front-runner and a live alternative, both quantified, neither inflated into false precision.
 
-I've come to think giving the range *is* the rigor. A single number would feel more authoritative and be less true.
-
----
-
-## The one thing that settles it
-
-Here's the punchline that keeps me humble about all of the above: every number in this essay is a placeholder waiting to be deleted.
-
-The moment Mom gets the one targeted test — checking specifically for the child's exact change — all of this collapses to an answer. If she carries it, the odds aren't "82%," they're "yes," and the door is Mom. If she doesn't, the *de novo* door swings wide open and becomes the overwhelming favorite. One test replaces the entire probability model with a fact.
-
-So why bother with the math at all, if a test will overwrite it? Two reasons. First, because the math tells you *which* test is worth doing, and in what order — it's a map for spending the next dollar of attention. And second, because in the waiting — and there is always waiting — the odds are how you hold the uncertainty without either panicking or pretending. They let you say something honest to yourself in the gap between the question and the answer.
+Reporting the range *is* the rigor. A single number would feel more authoritative and be less true.
 
 ---
 
-## The thing I actually want you to take away
+## The one observation that settles it
 
-Strip out the genetics and this is a tiny, general lesson about how evidence works, and I find it weirdly comforting:
+The point that keeps all of the above honest: every number here is a placeholder awaiting deletion.
 
-- You start with honest, humble starting odds.
-- Each new fact moves them — and a fact moves your belief in proportion to *how much better it fits one explanation than another*. A clear result in a sibling isn't "nothing"; it's a 2-to-1 nudge, and it counts.
-- When one explanation dies, its probability flows to whichever survivor was already strongest, not equally to all.
-- And the intellectually honest output is usually a range, not a point — because the inputs themselves are ranges.
+The moment parent A undergoes the one targeted test — assaying specifically for the proband's exact variant — the entire model collapses to a fact. If parent A carries it, the answer is not "82%," it is "yes," and the origin is parent A. If parent A does not carry it, the *de novo* hypothesis swings open and becomes the overwhelming favorite (with the residual reserved for the mosaicism that no blood test fully excludes). One test replaces the whole probability model with an observation.
 
-A parent might do this arithmetic at the kitchen table because the alternative — treating the unknown as either a catastrophe or a nothing — is worse. The numbers don't make you certain. They make you *calibrated*, which in the long middle of not-yet-knowing is a much kinder place to stand.
+So why bother with the model if a test will overwrite it? Two reasons. First, the model identifies *which* test is worth doing, and in what order — it is a map for allocating the next unit of diagnostic effort, ensuring the most informative, least invasive assay is run first. Second, in the interval before results — and there is always an interval — the posterior is how uncertainty is held calibrated, without either overreacting or dismissing.
 
-Eventually Mom gets tested. Then you delete the odds and write down the answer. Until then, this is how you hold a question: with arithmetic, a range, and a refusal to pretend either way.
+---
+
+## The general lesson underneath
+
+Strip out the genetics and this is a compact, general statement about how evidence operates:
+
+- Begin with honest, humble priors — here, the population de novo rate.
+- Each new fact updates them — and a fact moves belief in proportion to *how much better it fits one hypothesis than another* (the Bayes factor). A clear result in a sibling is not "nothing"; it is a 2-to-1 nudge, and it counts.
+- When one hypothesis is eliminated, its probability flows to whichever survivor already had the higher prior, not equally to all.
+- The intellectually honest output is usually a range, not a point — because the inputs themselves are ranges.
+
+This arithmetic is worth doing because the alternative — treating an unknown as either a catastrophe or a nothing — is worse. The numbers do not deliver certainty. They deliver *calibration*, which in the long interval of not-yet-knowing is a far more defensible place to stand.
+
+Eventually parent A is tested. Then the odds are deleted and the answer is written down. Until then, this is how a question of origin is held: with arithmetic, a range, and a refusal to pretend in either direction.

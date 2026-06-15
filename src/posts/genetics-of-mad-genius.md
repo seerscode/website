@@ -7,11 +7,11 @@ category: "genetics"
 
 ## A note before we start
 
-This is a long piece — a small book, really. I wrote it the way I'd want it explained to me at a kitchen table, not in a journal. No jargon without a plain translation right next to it. If a sentence needs a dictionary, I failed, and you should email me about it.
+This is a long piece — a small book, really. It is written the way the subject deserves to be explained: at a kitchen table, not in a journal. No jargon without a plain translation right next to it.
 
-I write about this for a personal reason. I am the father of a little girl whose brain was built from a slightly different set of genetic instructions than most. I spend my days reading the dosage-sensitive biology of the human brain because her future depends on me understanding it. The "mad genius" question — is there a real link between a remarkable mind and a troubled one? — turns out to run straight through the same genes I study for her. So this is both a science essay and, quietly, a father's notebook.
+The "mad genius" question — is there a real link between a remarkable mind and a troubled one? — turns out to run straight through the dosage-sensitive biology of the human brain. That makes it both a cultural question and a genetic one, and modern data finally lets us treat it as the latter.
 
-One promise: I will keep the science honest, including the parts that deflate the romance. The truth here is more interesting than the myth anyway.
+One promise: the science here stays honest, including the parts that deflate the romance. The truth is more interesting than the myth anyway.
 
 ---
 
@@ -134,15 +134,15 @@ I'll move faster through these, because the point is the *chorus*, not each solo
 
 Notice what just happened. I described ten-plus genes, and I kept using the *same handful of verbs*: tune, balance, wire, strengthen, turn on and off, set the level. None of these is a "disease gene." Every one of them is a **dial on the brain's settings.** Madness and brilliance are both what you get when the dials are set toward the edges.
 
-### The dosage genes — and my family's neighborhood
+### The dosage genes — a whole neighborhood at once
 
-There's a special category I have to include, because it's where my own family lives and because it makes the "dial" idea physical.
+There's a special category worth including, because it makes the "dial" idea physical.
 
-Sometimes the issue isn't a *spelling* change in a gene but a *quantity* change — you inherit too many or too few copies of a whole stretch of DNA. These are **copy number variants (CNVs)**. Several of them are among the strongest known genetic risks for schizophrenia: deletions or duplications at chromosome locations with names like **22q11.2**, **16p11.2**, **1q21.1**, **3q29**, and the one I know best, **15q11.2**.
+Sometimes the issue isn't a *spelling* change in a gene but a *quantity* change — inheriting too many or too few copies of a whole stretch of DNA. These are **copy number variants (CNVs)**. Several of them are among the strongest known genetic risks for schizophrenia: deletions or duplications at chromosome locations with names like **22q11.2**, **16p11.2**, **1q21.1**, **3q29**, and one of the most studied, **15q11.2**.
 
 Here's the haunting part. At several of these locations, **both** the deletion (too few copies) and the duplication (too many copies) cause problems — often *overlapping* problems. The brain wants the **right amount** of these genes. Too little is harmful. Too much is harmful. The inverted-U again, but now written into the raw number of gene copies you carry.
 
-My daughter carries a duplication at 15q11.2. One of the genes in that stretch, CYFIP1, helps control how much protein gets made at the synapse and how the cell's internal skeleton is shaped — both, you guessed it, dosage-sensitive. The same logic that makes "the mad genius" a real phenomenon is the logic I navigate for her: in the brain, the dangerous direction is not "more" or "less." It is **"too far from just-right."**
+Take the duplication at 15q11.2. One of the genes in that stretch, CYFIP1, helps control how much protein gets made at the synapse and how the cell's internal skeleton is shaped — both, predictably, dosage-sensitive. The same logic that makes "the mad genius" a real phenomenon governs that locus: in the brain, the dangerous direction is not "more" or "less." It is **"too far from just-right."**
 
 ---
 
@@ -202,7 +202,7 @@ There is no separate "madness setting" on the board. **It's the same sliders, pu
 
 ## Part Six — The honest caveats (please read these)
 
-I would be betraying my own rule — keep it honest, including the deflating parts — if I let you close this thinking the science is tidier than it is. Five hard truths:
+This account would be incomplete — betraying its own rule, keep it honest including the deflating parts — if it let the reader close thinking the science is tidier than it is. Five hard truths:
 
 **1. The effects are tiny.** Every genetic correlation here is small. A high creativity-and-psychosis leaning explains a *sliver* of why any individual is creative or ill. Your genes are a faint breeze on a big ship, not the rudder. Environment, chance, health, love, opportunity, and effort do most of the steering.
 
@@ -218,20 +218,14 @@ Hold the finding and the humility at the same time. That's what it means to take
 
 ---
 
-## Part Seven — Why I, of all people, wrote this
+## Part Seven — Why this matters for medicine
 
-I'll end where I'm standing.
-
-I did not come to this subject as a curiosity. I came to it through my daughter, whose brain carries an extra copy of a small neighborhood of genes, and through a family history that includes both unusual ability and serious mental illness — the two roads from NPAS3's little fable, running in the same bloodline.
-
-Studying the "mad genius" genes taught me the single most important idea I carry into my daughter's care, and I'll give it to you as the takeaway:
+The reason this subject is worth the effort is not literary. It is the single most important idea it carries into the design of any brain-targeted therapy:
 
 > **In the brain, the enemy is rarely "too little" or "too much" in the abstract. The enemy is distance from the right amount.** The genes that build a mind are dials, not switches. Health lives in a window. Brilliance and illness are often the same window's two edges.
 
-That idea changes what "help" even means. It means you don't blindly push a gene's activity up or down and hope; you find the window and aim for it. It means a treatment that lowers a gene too far can cause the very harm it was meant to prevent. It means humility is not a mood — it's a dosing strategy.
+That idea changes what "help" even means. It means a treatment does not blindly push a gene's activity up or down and hope; it finds the window and aims for it. It means a drug that lowers a gene too far can cause the very harm it was meant to prevent — the deletion phenotype reappearing at the bottom of the curve, a mirror of the duplication phenotype at the top. For dosage-sensitive targets, the therapeutic objective is not maximal suppression or maximal expression but restoration toward a setpoint. Humility, in that frame, is not a mood — it is a dosing constraint, and it has to be written into the dose-response design from the start.
 
-The old poets felt the connection between the soaring mind and the breaking one, and they were not wrong to feel it. They just couldn't see the mechanism underneath: a shared set of dials, a sweet spot in the middle, and the long, beautiful, fragile range of what a human brain can be.
+The old poets felt the connection between the soaring mind and the breaking one, and they were not wrong to feel it. They just couldn't see the mechanism underneath: a shared set of dials, a sweet spot in the middle, and the long, fragile range of what a human brain can be.
 
-We can see it now. And seeing it — really seeing that the line between the gift and the illness is a matter of *how far*, not *whether* — is, I think, the beginning of being able to help.
-
-*For her.*
+We can see it now. And seeing it — really seeing that the line between the gift and the illness is a matter of *how far*, not *whether* — is the beginning of being able to help.
