@@ -49,6 +49,21 @@ Both WES and WGS, in their standard form, are **short-read** technologies: the D
 
 The compact hierarchy: **WES reads the coding 1–2%. WGS reads all of it, more evenly, and calls structure better. Long-read reads it in long, phaseable, repeat-spanning stretches.** Each step widens what is *visible*, and each adds cost and interpretive load. None of them, individually, reads the methylation layer or guarantees detection of low-level mosaicism — which is why sequencing depth is necessary but never sufficient on its own.
 
+| | **Exome (WES)** | **Whole-genome (WGS)** | **Long-read** |
+|---|---|---|---|
+| **Reads** | Coding ~1–2% | Entire genome (~100%) | Entire genome, in long molecules |
+| **Read length** | Short (~150 bp) | Short (~150 bp) | Long (10,000s of bp) |
+| **Point mutations** | Yes, in coding regions | Yes, genome-wide | Yes |
+| **Noncoding / regulatory** | No | Yes | Yes |
+| **Copy-number / structural** | Weak | Good, breakpoints to the base | Best |
+| **Repeat expansions** | No | Limited | Yes — reads through them |
+| **Balanced rearrangements** | No | Partial | Yes |
+| **Phasing (which parent)** | No | Limited | Yes, natively |
+| **Methylation** | No | No | Yes, on some platforms |
+| **Cost / interpretive load** | Lowest | Higher | Highest |
+
+The one-line rule of thumb: if the exome is the right tool when you suspect a typo in a known gene, WGS is what you reach for when the answer might be hiding in the noncoding 98% or in a structural change — and long-read is the last resort for repeats and rearrangements the short-read assays are physically blind to.
+
 ## Why a negative result is not the closure it appears to be
 
 Suppose the comprehensive sequence read comes back clean — **trio whole-exome sequencing (WES)** on the proband and both parents. The instinct is relief, followed almost immediately by a sharper unease: if it is clean, *what is the explanation?*
